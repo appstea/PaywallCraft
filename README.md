@@ -18,12 +18,12 @@
 ```
 import PaywallCraftCore
 
-var PaywallCore: PaywallCraftCore.Instance { __Paywall.core }
-enum __Paywall {
+var PaywallCore: PaywallCraftCore.Instance { _Paywall.core }
+private enum _Paywall {
 
   static let core = PaywallCraftCore.Instance(config: config)
   
-  private static let config = PaywallCraftCore.Config(
+  static let config = PaywallCraftCore.Config(
     paywall: .init(
       apiKey: "appl_PrQxhLfrujRwauAlGngBUArKhIK",
       offering: "com.appstea.proto.first",
