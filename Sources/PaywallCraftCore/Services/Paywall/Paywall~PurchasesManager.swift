@@ -228,7 +228,7 @@ extension Paywall {
         defer {
           HUD.dismiss()
         }
-        guard let transaction = transaction, error == nil else {
+        guard let transaction = transaction else {
           completion?(.failed)
           return
         }
@@ -243,7 +243,7 @@ extension Paywall {
         case .restored:
           result = .restored(isTrial: product.introductoryDiscount?.paymentMode == .freeTrial)
         default:
-          result = .unknown
+          result = error == nil ? .unknown : .failed
         }
 
         if let self = self {
