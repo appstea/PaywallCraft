@@ -317,17 +317,19 @@ private extension Paywall.PurchasesManager {
     Purchases.shared.getOfferings { [weak self] offerings, _ in
       guard let self = self else { return }
 
-      if let packages = offerings?.current?.availablePackages {
-        for package in packages {
-          self.products.insert(package.storeProduct)
-        }
-      }
-
       if let packages = offerings?.offering(identifier: self.rcSetup.offering)?.availablePackages {
         for package in packages {
           self.products.insert(package.storeProduct)
         }
       }
+      
+      if self.products.isEmpty,
+         let packages = offerings?.current?.availablePackages {
+        for package in packages {
+          self.products.insert(package.storeProduct)
+        }
+      }
+      
       debugPrint("[DEBUG] Products: \(self.products)")
       self.isLoadingProducts = false
       Notification.Paywall.Update.post(.products)
