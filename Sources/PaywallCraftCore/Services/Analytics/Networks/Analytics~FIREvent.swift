@@ -26,7 +26,7 @@ fileprivate extension String {
 
 }
 
-extension IFIRAnalyticsEvent {
+public extension IFIRAnalyticsEvent {
 
   var firName: String? { name.firebaseKey }
 
