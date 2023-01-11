@@ -10,7 +10,7 @@ import UIKit
 import Stored
 import AnalyticsCraft
 
-enum Analytics { }
+public enum Analytics { }
 
 public extension Config {
 
@@ -47,7 +47,7 @@ extension Analytics {
   }
 }
 
-extension Analytics {
+public extension Analytics {
 
   final class Service: AppService {
 
@@ -143,7 +143,7 @@ extension Analytics {
 
     // MARK: - Public
 
-    func send(_ event: IAnalyticsEvent) {
+    public func send(_ event: IAnalyticsEvent) {
       transmitter.send(event)
     }
 

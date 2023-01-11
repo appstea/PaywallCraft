@@ -9,7 +9,7 @@ import FirebaseAnalytics
 
 import AnalyticsCraft
 
-protocol IFIRAnalyticsEvent: IAnalyticsEvent {
+public protocol IFIRAnalyticsEvent: IAnalyticsEvent {
 
   var firName: String? { get }
   var firParams: [String: Any]? { get }

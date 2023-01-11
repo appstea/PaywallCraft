@@ -9,7 +9,7 @@ import Branch
 
 import AnalyticsCraft
 
-protocol IBranchAnalyticsEvent: IAnalyticsEvent {
+public protocol IBranchAnalyticsEvent: IAnalyticsEvent {
   
   var data: BranchEvent? { get }
   

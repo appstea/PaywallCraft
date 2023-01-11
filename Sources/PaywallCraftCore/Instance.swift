@@ -61,6 +61,8 @@ final public class Instance: Cascade.AppDelegate {
     else { preconditionFailure("Key window not assigned") }
     return w
   }
+  
+  public var analytics: Analytics.Service? { .shared }
 
   // MARK: - Init
 
