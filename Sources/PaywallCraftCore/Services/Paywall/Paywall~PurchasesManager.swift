@@ -247,10 +247,9 @@ extension Paywall {
         }
 
         if let self = self {
-          let hasActiveEntitlement = customerInfo?.entitlements[product.productIdentifier]?.isActive == true
-          let isSuccessful = result.isAny(of: .purchased(isTrial: false), .purchased(isTrial: true),
-                                          .restored(isTrial: false), .restored(isTrial: true))
-          self.premium = hasActiveEntitlement || isSuccessful
+          let hasActiveEntitlement = customerInfo?.entitlements.active.isEmpty == false
+          self.premium = hasActiveEntitlement
+          
           if !hasActiveEntitlement {
             self.schedulePurchaseSync()
           }
@@ -266,15 +265,17 @@ extension Paywall {
         guard let self = self else { return }
 
         guard error == nil else {
-
           block?(.error)
           return
         }
 
-        let restored = self.products.filter { customInfo?.entitlements[$0.productIdentifier]?.isActive == true }
-        if !restored.isEmpty {
+        if customInfo?.entitlements.active.isEmpty == false {
           self.premium = true
-          block?(.products(Set(restored.map(\.productIdentifier))))
+          
+          let restored = self.products
+            .filter { customInfo?.entitlements[$0.productIdentifier]?.isActive == true }
+            .map(\.productIdentifier)
+          block?(.products(Set(restored)))
         }
         else {
           block?(.noProducts)
@@ -317,14 +318,15 @@ private extension Paywall.PurchasesManager {
     Purchases.shared.getOfferings { [weak self] offerings, _ in
       guard let self = self else { return }
 
-      if let packages = offerings?.offering(identifier: self.rcSetup.offering)?.availablePackages {
-        for package in packages {
-          self.products.insert(package.storeProduct)
-        }
-      }
+      // TODO: Add support for additional offerrings
+//      if let packages = offerings?.offering(identifier: self.rcSetup.offering)?.availablePackages {
+//        for package in packages {
+//          self.products.insert(package.storeProduct)
+//        }
+//      }
       
-      if self.products.isEmpty,
-         let packages = offerings?.current?.availablePackages {
+//      if self.products.isEmpty,
+      if let packages = offerings?.current?.availablePackages {
         for package in packages {
           self.products.insert(package.storeProduct)
         }
@@ -345,20 +347,13 @@ private extension Paywall.PurchasesManager {
   func handleCustomerInfo(_ info: CustomerInfo?) {
     guard let info = info else {
       premium = false
-
       DispatchQueue.main.asyncAfter(deadline: .now() + Const.retryDelay) { [weak self] in
         self?.getCustomerInfo()
       }
       return
     }
 
-    isLoadingCustomerInfo = false
-    guard !info.entitlements.all.isEmpty else {
-      premium = false
-      return
-    }
-
-    premium = products.contains { info.entitlements[$0.productIdentifier]?.isActive == true }
+    premium = info.entitlements.active.isEmpty == false
   }
 
 }
