@@ -40,7 +40,8 @@ let package = Package(
       .package(url: "https://github.com/RevenueCat/purchases-ios.git", .upToNextMajor(from: "4.5.2")),
       .package(url: "https://github.com/ashleymills/Reachability.swift", branch: "master"),
       .package(url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "9.1.0")),
-      .package(url: "https://github.com/BranchMetrics/ios-branch-deep-linking-attribution", .upToNextMajor(from: "1.42.0"))
+      .package(url: "https://github.com/BranchMetrics/ios-branch-deep-linking-attribution", .upToNextMajor(from: "1.42.0")),
+      .package(url: "https://github.com/sereivoanyong/SVProgressHUD.git", branch: "master"),
     ],
     targets: [
 
@@ -103,6 +104,7 @@ let package = Package(
               .product(name: "CallbacksCraft", package: "CallbacksCraft"),
 
               .product(name: "PinLayout", package: "PinLayout"),
+              .product(name: "SVProgressHUD", package: "SVProgressHUD"),
             ],
             linkerSettings: [
               .linkedFramework("UIKit"),
