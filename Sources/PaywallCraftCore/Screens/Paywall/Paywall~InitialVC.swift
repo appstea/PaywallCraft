@@ -27,6 +27,10 @@ extension Paywall {
 
   public struct ViewModel {
 
+      private enum Const {
+          static let tryFreeButtonFontSize: CGFloat = isPad ? 22 : 17
+      }
+      
     private static let additionalAttributes: [SwiftyAttributes.Attribute] = [
       .font(UIFont.systemFont(ofSize: isPad ? 16 : 13)),
       .textColor(Color.Paywall.dopButton.color),
@@ -151,7 +155,7 @@ extension Paywall {
 
       let priceRange = (result.string as NSString).range(of: price)
       if priceRange.location != NSNotFound && priceRange.length > 0 {
-        result.addAttributes([.font(.systemFont(ofSize: 17.ui(.paywall), weight: .bold))], range: priceRange)
+          result.addAttributes([.font(.systemFont(ofSize: InitialVC.Const.tryFreeButtonFontSize + 2, weight: .bold))], range: priceRange)
       }
       return result
     }
@@ -192,9 +196,10 @@ extension Paywall {
 
   final class InitialVC: ViewController {
 
-    private enum Const {
+    enum Const {
       static let additionalButtonsHeight = CGFloat(50)
       static let ctaButtonSize = CGSize(width: isPad ? 400 : 285.ui(.paywall), height: isPad ? 70 : 50)
+        static let tryFreeButtonFontSize: CGFloat = isPad ? 22 : 17
     }
 
     fileprivate var trialProduct: StoreProduct?
@@ -252,7 +257,7 @@ extension Paywall {
       $0.titleLabel?.textAlignment = .center
       $0.contentLayout = .alignByEdges(spacing: 10.ui(.paywall),
                                        padding: UIEdgeInsets(top: 0, left: 10.ui(.paywall), bottom: 0, right: 10.ui(.paywall)))
-      $0.titleLabel?.setDynamicFont(font: .systemFont(ofSize: isPad ? 22 : 17, weight: .bold),
+        $0.titleLabel?.setDynamicFont(font: .systemFont(ofSize: Const.tryFreeButtonFontSize, weight: .bold),
                                     maximumPointSize: isPad ? 26 : 20)
       $0.layer.cornerRadius = 13
       $0.clipsToBounds = true
