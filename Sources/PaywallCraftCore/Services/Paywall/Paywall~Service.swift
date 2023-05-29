@@ -91,8 +91,7 @@ extension Paywall {
         case creative(String)
       }
       case branch(Branch)
-
-//      case onboarding(Onboarding)
+      case paywall_source(IPaywallSource)
     }
 
     private let manager: PurchasesManager
@@ -161,6 +160,8 @@ extension Paywall {
         case .keyword(let keyword): purchases.attribution.setKeyword(keyword)
         case .creative(let id): purchases.attribution.setCreative(id)
         }
+      case .paywall_source(let source):
+          purchases.attribution.setAttributes(["paywall_source": source.analytics.value.lowercased().replacingOccurrences(of: " ", with: "_")])
       }
     }
 

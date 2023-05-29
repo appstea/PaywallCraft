@@ -121,8 +121,7 @@ extension Paywall {
     func showPaywallScreen(source: some IPaywallSource, screen: some IPaywallScreen,
                            from presenter: UIViewController, onEvents: Paywall.OnEvents? = nil) {
       if let current = currentPaywallScreen {
-        if current.source == source,
-           current.screen == screen {
+        if current.source == source, current.screen == screen {
           return
         }
 
@@ -254,6 +253,7 @@ extension Paywall {
             self.schedulePurchaseSync()
           }
         }
+        Paywall.Service.shared?.updateAttribute(.paywall_source(source))
         completion?(result)
       }
     }
