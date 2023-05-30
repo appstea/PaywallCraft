@@ -131,6 +131,8 @@ extension Paywall {
         }
       }
 
+      Paywall.Service.shared?.updateAttribute(.paywall_source(source))
+
       let paywallVC = paywallScreen(source: source, screen: screen) { [weak self] in
         self?.currentPaywallScreen = nil
         onEvents?($0)
@@ -253,7 +255,6 @@ extension Paywall {
             self.schedulePurchaseSync()
           }
         }
-        Paywall.Service.shared?.updateAttribute(.paywall_source(source))
         completion?(result)
       }
     }
