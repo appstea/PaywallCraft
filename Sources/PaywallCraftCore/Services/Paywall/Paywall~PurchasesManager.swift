@@ -131,8 +131,6 @@ extension Paywall {
         }
       }
 
-      Paywall.Service.shared?.updateAttribute(.paywall_source(source))
-
       let paywallVC = paywallScreen(source: source, screen: screen) { [weak self] in
         self?.currentPaywallScreen = nil
         onEvents?($0)
@@ -223,7 +221,10 @@ extension Paywall {
       case deferred
       case unknown
     }
+      
     func purchase(product: StoreProduct, source: some IPaywallSource, completion: ((PurchaseResult) -> Void)?) {
+      Paywall.Service.shared?.updateAttribute(.paywall_source(source))
+
       HUD.show()
       Purchases.shared.purchase(product: product) { [weak self] transaction, customerInfo, error, _ in
         defer {
