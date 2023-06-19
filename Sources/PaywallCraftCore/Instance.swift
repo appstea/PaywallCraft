@@ -159,6 +159,10 @@ final public class Instance: Cascade.AppDelegate {
     Paywall.Service.shared?.paywallScreen(source: source, screen: screen, onEvents: onEvents)
   }
 
+    @MainActor
+    public func updateAppsflyerAttribute(_ attribute: String) {
+      Paywall.Service.shared?.updateAttribute(.appsFlyer(attribute))
+    }
 }
 
 // MARK: - Private

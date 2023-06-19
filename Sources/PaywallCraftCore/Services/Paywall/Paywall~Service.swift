@@ -66,11 +66,11 @@ extension Notification {
   }
 }
 
-public extension Paywall {
+extension Paywall {
 
-final class Service: AppService {
+  final class Service: AppService {
 
-    public enum Attribute {
+    enum Attribute {
       case idfa(String)
       case idfv(String)
       case apns(Data)
@@ -78,7 +78,7 @@ final class Service: AppService {
       case fbAnonId(String)
 
       // swiftlint:disable:next nesting
-    public enum Branch {
+      enum Branch {
         case mediaSource(String)
         case campaign(String)
         case adGroup(String)
@@ -88,7 +88,6 @@ final class Service: AppService {
       }
       case branch(Branch)
       case paywall_source(IPaywallSource)
-      
       case appsFlyer(String)
     }
 
@@ -141,7 +140,7 @@ final class Service: AppService {
     
     func createEvent() -> Paywall.Event { manager.createEvent() }
 
-    public func updateAttribute(_ attribute: Attribute) {
+    func updateAttribute(_ attribute: Attribute) {
       let purchases = Purchases.shared
       switch attribute {
       case .apns(let data): purchases.attribution.setPushToken(data)
