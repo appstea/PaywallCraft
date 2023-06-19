@@ -78,12 +78,7 @@ final public class Instance: Cascade.AppDelegate {
   }
 
   // MARK: - Public
-  
-  @MainActor
-  public func updateAttribute(_ attribute: Paywall.Service.Attribute) {
-    Paywall.Service.shared?.updateAttribute(attribute)
-  }
-    
+      
   @MainActor
   public func assignKeyWindow(_ window: UIWindow) {
     UIService.shared?.window = window
