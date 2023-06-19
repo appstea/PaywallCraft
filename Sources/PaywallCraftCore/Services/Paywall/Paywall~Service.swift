@@ -55,9 +55,7 @@ public extension Config {
 // MARK: - Paywall
 
 extension Notification {
-
   enum Paywall {
-
     enum Update: INotification {
       typealias Data = Event
       enum Event {
@@ -65,9 +63,7 @@ extension Notification {
         case products
       }
     }
-
   }
-
 }
 
 extension Paywall {
@@ -105,7 +101,7 @@ extension Paywall {
     
     // MARK: - Init
 
-    private(set) static var shared: Paywall.Service?
+    private (set) static var shared: Paywall.Service?
     static func prepare(using config: Config) {
       shared = .init(config: config)
     }
