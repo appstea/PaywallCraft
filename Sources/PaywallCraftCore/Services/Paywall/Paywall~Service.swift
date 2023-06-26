@@ -160,7 +160,7 @@ extension Paywall {
       case .paywall_source(let source):
           purchases.attribution.setAttributes(["paywall_source": source.analytics.value.lowercased().replacingOccurrences(of: " ", with: "_")])
       case .appsFlyer(let id):
-          purchases.attribution.setAttributes(["appsflyer_id": id])
+          purchases.attribution.setAppsflyerID(id)
       }
     }
 
