@@ -33,6 +33,7 @@ final public class Instance: Cascade.AppDelegate {
     BranchService.shared,
     Paywall.Service.shared,
     NotificationService.shared,
+    AppsflyerService.shared
   ]
 
   public private(set) lazy var scene: Scene = {
@@ -72,7 +73,8 @@ final public class Instance: Cascade.AppDelegate {
     Paywall.Service.prepare(using: config)
     FirebaseService.prepare(using: config)
     BranchService.prepare(using: config)
-    
+    AppsflyerService.prepare(using: config)
+
     super.init()
     subscribeOnPaywallEvents()
   }
@@ -158,11 +160,6 @@ final public class Instance: Cascade.AppDelegate {
                             onEvents: Paywall.OnEvents? = nil) -> Paywall.ViewController? {
     Paywall.Service.shared?.paywallScreen(source: source, screen: screen, onEvents: onEvents)
   }
-
-    @MainActor
-    public func updateAppsflyerAttribute(_ attribute: String) {
-      Paywall.Service.shared?.updateAttribute(.appsFlyer(attribute))
-    }
 }
 
 // MARK: - Private

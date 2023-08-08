@@ -11,14 +11,18 @@ public struct Config {
 
   let paywall: Paywall
   let analytics: Analytics
+  let appsflyer: Appsflyer?
   let ui: UI
 
-  public init(paywall: Paywall, analytics: Analytics? = nil, ui: UI? = nil) {
+  public init(paywall: Paywall,
+              analytics: Analytics? = nil,
+              appsflyer: Appsflyer? = nil,
+              ui: UI? = nil) {
     self.paywall = paywall
     self.analytics = analytics ?? Analytics()
+    self.appsflyer = appsflyer
     self.ui = ui ?? UI()
   }
-
 }
 
 // MARK: - UI

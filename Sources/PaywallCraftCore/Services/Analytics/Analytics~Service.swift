@@ -19,12 +19,13 @@ public extension Config {
     let isFirebaseEnabled: Bool
     let isBranchEnabled: Bool
 
-    public init(isOSLogEnabled: Bool? = nil, isFirebaseEnabled: Bool? = nil, isBranchEnabled: Bool? = nil) {
+    public init(isOSLogEnabled: Bool? = nil,
+                isFirebaseEnabled: Bool? = nil,
+                isBranchEnabled: Bool? = nil) {
       self.isOSLogEnabled = isOSLogEnabled ?? true
       self.isFirebaseEnabled = isFirebaseEnabled ?? true
       self.isBranchEnabled = isBranchEnabled ?? true
     }
-
   }
 }
 
