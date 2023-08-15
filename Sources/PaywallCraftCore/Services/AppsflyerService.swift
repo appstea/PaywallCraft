@@ -58,12 +58,18 @@ final class AppsflyerService: AppService, AppsFlyerLibDelegate {
                 if let campaign = conversionInfo["campaign"] as? String {
                     paywall?.updateAttribute(.appsFlyer(.campaign(campaign)))
                 }
-                if let creative = conversionInfo["creative"] as? String {
+                if let creative = conversionInfo["af_adset_id"] as? String {
                     paywall?.updateAttribute(.appsFlyer(.creative(creative)))
                 }
-//                Ad Group
-//                Ad
-//                Keywords
+                if let ad = conversionInfo["af_ad"] as? String {
+                    paywall?.updateAttribute(.appsFlyer(.ad(ad)))
+                }
+                if let adGroup = conversionInfo["af_adset"] as? String {
+                    paywall?.updateAttribute(.appsFlyer(.adGroup(adGroup)))
+                }
+                if let keyword = conversionInfo["af_keywords"] as? String {
+                    paywall?.updateAttribute(.appsFlyer(.keyword(keyword)))
+                }
             }
         }
     }
