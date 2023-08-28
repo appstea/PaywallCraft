@@ -68,15 +68,15 @@ extension Permissions {
         case photos
         case motion
           
-        var isAvailable: Bool {
-          guard isCatalyst || isMacDesignedForPad
-          else { return true }
-          
-          switch self {
-          case .motion: return false
-          default: return true
-          }
-        }
+//        var isAvailable: Bool {
+//          guard isCatalyst || isMacDesignedForPad
+//          else { return true }
+//
+//          switch self {
+//          case .motion: return false
+//          default: return true
+//          }
+//        }
       }
       
       public enum Status: Equatable {
@@ -100,7 +100,7 @@ extension Permissions {
     ]
     fileprivate var resolvedPermissions: [Permission] {
       permissions
-        .filter { $0.type.isAvailable }
+        .filter { $0.type != .motion }
         .sorted { lhs, rhs in
           if lhs.type.isAny(of: .locationAlways, .locationWhenInUse) { return false }
           if rhs.type.isAny(of: .locationAlways, .locationWhenInUse) { return true }
