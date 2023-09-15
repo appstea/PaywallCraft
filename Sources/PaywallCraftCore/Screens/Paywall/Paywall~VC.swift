@@ -47,9 +47,7 @@ extension Paywall {
       super.init(nibName: nil, bundle: nil)
     }
 
-    required public init?(coder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
-    }
+    required public init?(coder: NSCoder) { return nil }
 
     // MARK: - Lifecycle
 
