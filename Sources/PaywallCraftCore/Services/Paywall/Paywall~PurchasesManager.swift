@@ -51,10 +51,12 @@ extension Paywall {
     private weak var currentPaywallScreen: Paywall.ViewController?
     private let transactionsObserver = TransactionsObserver()
 
+    private var currentOffering: Offering?
+      
     private var products: Set<StoreProduct> = [] {
       didSet { Notification.Paywall.Update.post(.products) }
     }
-
+      
     private var premium: Bool = false {
       didSet {
         if oldValue != premium {
@@ -101,6 +103,10 @@ extension Paywall {
        premium = value
     }
       
+    func isPossibleToShowCustomPaywall() -> Bool {
+        currentOffering?.paywall != nil
+    }
+
     func createEvent() -> Paywall.Event { .init(isPremium: isPremium) }
     
     // MARK: - UI
@@ -331,7 +337,8 @@ private extension Paywall.PurchasesManager {
 //        }
 //      }
       
-//      if self.products.isEmpty,
+      self.currentOffering = offerings?.current
+        
       if let packages = offerings?.current?.availablePackages {
         for package in packages {
           self.products.insert(package.storeProduct)

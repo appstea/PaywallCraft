@@ -153,6 +153,10 @@ extension Paywall {
             manager.updatePremium(value)
         }
         
+        func isPossibleToShowCustomPaywall() -> Bool {
+            manager.isPossibleToShowCustomPaywall()
+        }
+        
         func createEvent() -> Paywall.Event { manager.createEvent() }
         
         func updateAttribute(_ attribute: Attribute) {

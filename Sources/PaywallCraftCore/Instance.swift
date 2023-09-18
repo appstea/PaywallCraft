@@ -127,6 +127,13 @@ final public class Instance: Cascade.AppDelegate {
     Paywall.Service.shared?.updatePremium(value)
   }
     
+    public func isPossibleToShowCustomPaywall() -> Bool {
+        if let service = Paywall.Service.shared {
+            return service.isPossibleToShowCustomPaywall()
+        }
+        return false
+    }
+
   // MARK: Paywall screens
 
   @MainActor
