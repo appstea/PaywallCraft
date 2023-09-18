@@ -149,6 +149,10 @@ extension Paywall {
         
         // MARK: - Public
         
+        func updatePremium(_ value: Bool) {
+            manager.updatePremium(value)
+        }
+        
         func createEvent() -> Paywall.Event { manager.createEvent() }
         
         func updateAttribute(_ attribute: Attribute) {

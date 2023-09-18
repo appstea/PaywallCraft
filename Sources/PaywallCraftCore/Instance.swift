@@ -123,6 +123,10 @@ final public class Instance: Cascade.AppDelegate {
     await UIService.shared?.checkIDFAAccessIfNeeded()
   }
   
+  public func updatePremium(_ value: Bool) {
+    Paywall.Service.shared?.updatePremium(value)
+  }
+    
   // MARK: Paywall screens
 
   @MainActor

@@ -97,6 +97,10 @@ extension Paywall {
 
     // MARK: - Public
     
+    func updatePremium(_ value: Bool) {
+       premium = value
+    }
+      
     func createEvent() -> Paywall.Event { .init(isPremium: isPremium) }
     
     // MARK: - UI
