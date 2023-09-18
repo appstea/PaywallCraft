@@ -68,6 +68,7 @@ let package = Package(
               .product(name: "SwiftyAttributes", package: "SwiftyAttributes"),
               .product(name: "StackCraft", package: "StackCraft"),
               .product(name: "RevenueCat", package: "purchases-ios"),
+              .product(name: "RevenueCatUI", package: "purchases-ios"),
               .product(name: "Reachability", package: "Reachability.swift"),
               .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
               .product(name: "FirebaseMessaging", package: "firebase-ios-sdk"),
