@@ -506,7 +506,7 @@ public extension Permissions.ViewModel.Permission {
       type: .notifications,
       icon: PaywallCraftResources.Asset.Permissions.Feature.notifications.image,
       title: L10n.Permissions.Feature.Notifications.title,
-      description: L10n.Permissions.Feature.Notifications.description,
+      description: ""/*L10n.Permissions.Feature.Notifications.description*/,
       color: PaywallCraftResources.Color.Permissions.Feature.notifications.color,
       selectionColor: PaywallCraftResources.Color.Permissions.selected.color
     )
@@ -514,7 +514,7 @@ public extension Permissions.ViewModel.Permission {
       type: .locationAlways,
       icon: PaywallCraftResources.Asset.Permissions.Feature.location.image,
       title: L10n.Permissions.Feature.Location.title,
-      description: L10n.Permissions.Feature.Location.description,
+      description: ""/*L10n.Permissions.Feature.Location.description*/,
       color: PaywallCraftResources.Color.Permissions.Feature.location.color,
       selectionColor: PaywallCraftResources.Color.Permissions.selected.color
     )
@@ -522,7 +522,7 @@ public extension Permissions.ViewModel.Permission {
       type: .locationWhenInUse,
       icon: PaywallCraftResources.Asset.Permissions.Feature.location.image,
       title: L10n.Permissions.Feature.Location.title,
-      description: L10n.Permissions.Feature.Location.description,
+      description: ""/*L10n.Permissions.Feature.Location.description*/,
       color: PaywallCraftResources.Color.Permissions.Feature.location.color,
       selectionColor: PaywallCraftResources.Color.Permissions.selected.color
     )
@@ -530,7 +530,7 @@ public extension Permissions.ViewModel.Permission {
       type: .motion,
       icon: PaywallCraftResources.Asset.Permissions.Feature.motion.image,
       title: L10n.Permissions.Feature.MotionData.title,
-      description: L10n.Permissions.Feature.MotionData.description,
+      description: ""/*L10n.Permissions.Feature.MotionData.description*/,
       color: PaywallCraftResources.Color.Permissions.Feature.motion.color,
       selectionColor: PaywallCraftResources.Color.Permissions.selected.color
     )
@@ -538,7 +538,7 @@ public extension Permissions.ViewModel.Permission {
       type: .photos,
       icon: PaywallCraftResources.Asset.Permissions.Feature.photos.image,
       title: L10n.Permissions.Feature.Photos.title,
-      description: L10n.Permissions.Feature.Photos.description,
+      description: ""/*L10n.Permissions.Feature.Photos.description*/,
       color: PaywallCraftResources.Color.Permissions.Feature.photos.color,
       selectionColor: PaywallCraftResources.Color.Permissions.selected.color
     )

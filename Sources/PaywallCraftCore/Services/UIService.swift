@@ -49,6 +49,23 @@ final class UIService: AppService {
 
   // MARK: - Public
 
+    func checkIfATTAsked() -> Bool {
+      if #available(iOS 14.5, *) {
+          let status = ATTrackingManager.trackingAuthorizationStatus
+          if status != .notDetermined {
+            if status == .authorized {
+              updateIDFAAttribute()
+            }
+            return true
+          } else {
+            return false
+          }
+      } else {
+        updateIDFAAttribute()
+        return true
+      }
+    }
+    
   func checkIDFAAccessIfNeeded() async {
     if #available(iOS 14.5, *) {
       await requestAppTrackingTransparencyPermission()

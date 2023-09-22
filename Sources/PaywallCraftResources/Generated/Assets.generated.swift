@@ -61,6 +61,11 @@ public enum Assets {
   }
   public enum Images {
 
+    public enum Att {
+      public static let back = ImageAsset(name: "Images/ATT/back")
+      public static let content = ImageAsset(name: "Images/ATT/content")
+      public static let experience = ImageAsset(name: "Images/ATT/experience")
+    }
     public enum Paywall {
       public static let close = ImageAsset(name: "Images/Paywall/close")
       public static let cross = ImageAsset(name: "Images/Paywall/cross")

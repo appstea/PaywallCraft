@@ -165,50 +165,6 @@ extension Paywall {
       }
     }
 
-    func performPrepermissionChecks() {
-      checkIDFAAccessIfNeeded()
-    }
-
-    func checkIDFAAccessIfNeeded() {
-      if #available(iOS 14.5, *) {
-        requestAppTrackingTransparencyPermission()
-      }
-      else {
-        updateIDFAAttribute()
-      }
-    }
-
-    func updateIDFAAttribute() {
-      let idfa = ASIdentifierManager.shared().advertisingIdentifier.uuidString
-      Paywall.Service.shared?.updateAttribute(.idfa(idfa))
-    }
-
-    @available(iOS 14.5, *)
-    func requestAppTrackingTransparencyPermission(completion: (() -> Void)? = nil) {
-      ATTrackingManager.requestTrackingAuthorization { [weak self] status in
-//        let analytics = Analytics.Service.shared
-        switch status {
-        case .authorized:
-          self?.updateIDFAAttribute()
-//          analytics?.sendEvent(.didCompleteATTRequest(status: .authorized))
-//          FBAdSettings.setAdvertiserTrackingEnabled(true)
-        case .denied:
-//          analytics?.sendEvent(.didCompleteATTRequest(status: .denied))
-//          FBAdSettings.setAdvertiserTrackingEnabled(false)
-          break
-        case .notDetermined:
-//          analytics?.sendEvent(.didCompleteATTRequest(status: .notDetermined))
-//          FBAdSettings.setAdvertiserTrackingEnabled(false)
-          break
-        case .restricted:
-//          analytics?.sendEvent(.didCompleteATTRequest(status: .restricted))
-//          FBAdSettings.setAdvertiserTrackingEnabled(false)
-          break
-        @unknown default: break
-        }
-      }
-    }
-
     // MARK: - Logic
 
     func syncIfNeeded() {

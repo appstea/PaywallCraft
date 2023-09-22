@@ -44,7 +44,7 @@ public enum L10n {
   }
 
   public enum DefaultUpsell {
-    /// Premium\nNo ads & more features!
+    /// Premium\nUnlock & enjoy
     public static let title = L10n.tr("Localizable", "default_upsell.title")
     public enum Upgrade {
       /// UPGRADE
@@ -187,26 +187,18 @@ public enum L10n {
     }
     public enum Feature {
       public enum Location {
-        /// Location, so that the app can ensure that you get the most accurate local weather data
-        public static let description = L10n.tr("Localizable", "permissions.feature.location.description")
         /// Location Services
         public static let title = L10n.tr("Localizable", "permissions.feature.location.title")
       }
       public enum MotionData {
-        /// Motion & Fitness, short usage description
-        public static let description = L10n.tr("Localizable", "permissions.feature.motion_data.description")
         /// Motion & Fitness
         public static let title = L10n.tr("Localizable", "permissions.feature.motion_data.title")
       }
       public enum Notifications {
-        /// Notifications, to be aware of important, dangerous and disrupting weather changes
-        public static let description = L10n.tr("Localizable", "permissions.feature.notifications.description")
         /// Notifications
         public static let title = L10n.tr("Localizable", "permissions.feature.notifications.title")
       }
       public enum Photos {
-        /// Photos, short usage description
-        public static let description = L10n.tr("Localizable", "permissions.feature.photos.description")
         /// Photos
         public static let title = L10n.tr("Localizable", "permissions.feature.photos.title")
       }

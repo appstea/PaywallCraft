@@ -118,11 +118,17 @@ final public class Instance: Cascade.AppDelegate {
     for await _ in vc.events() { }
   }
 
-  @MainActor
-  public func checkATT() async {
-    await UIService.shared?.checkIDFAAccessIfNeeded()
-  }
-  
+    @MainActor
+    public func showATT() async {
+      if UIService.shared?.checkIfATTAsked() == false {
+        let window = keyWindow
+        let vc = ATTRequestVC()
+        window.rootViewController = vc
+        window.makeKeyAndVisible()
+        await vc.result()
+      }
+    }
+      
   public func updatePremium(_ value: Bool) {
     Paywall.Service.shared?.updatePremium(value)
   }
