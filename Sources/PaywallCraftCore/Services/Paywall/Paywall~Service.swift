@@ -149,14 +149,6 @@ extension Paywall {
         
         // MARK: - Public
         
-        func updatePremium(_ value: Bool) {
-            manager.updatePremium(value)
-        }
-        
-        func isPossibleToShowCustomPaywall() -> Bool {
-            manager.isPossibleToShowCustomPaywall()
-        }
-        
         func createEvent() -> Paywall.Event { manager.createEvent() }
         
         func updateAttribute(_ attribute: Attribute) {
@@ -192,20 +184,22 @@ extension Paywall {
         }
         
         /// main thread-trampolined
-        func showPaywall(source: some IPaywallSource, screen: some IPaywallScreen,
+        func showPaywall(source: some IPaywallSource, 
+                         screen: some IPaywallScreen,
                          from presenter: UIViewController? = nil,
+                         customScreen: Bool,
                          onEvents: Paywall.OnEvents? = nil) {
             guard let sessionIdx = SessionService.current?.currentSessionIdx else { return }
             guard Thread.isMainThread else {
                 DispatchQueue.main.async { [weak self] in
-                    self?.showPaywall(source: source, screen: screen, from: presenter, onEvents: onEvents)
+                    self?.showPaywall(source: source, screen: screen, from: presenter, customScreen: customScreen, onEvents: onEvents)
                 }
                 return
             }
             
             let context = Context(sessionNumber: sessionIdx)
             _showPaywallScreen(source: source, screen: screen, context: context,
-                               from: presenter, onEvents: onEvents)
+                               from: presenter, customScreen: customScreen, onEvents: onEvents)
         }
         
         @MainActor
@@ -267,14 +261,17 @@ private extension Paywall.Service {
     }
     
     @MainActor
-    func _showPaywallScreen(source: some IPaywallSource, screen: some IPaywallScreen,
-                            context: Paywall.Context, from presenter: UIViewController? = nil,
+    func _showPaywallScreen(source: some IPaywallSource, 
+                            screen: some IPaywallScreen,
+                            context: Paywall.Context, 
+                            from presenter: UIViewController? = nil,
+                            customScreen: Bool,
                             onEvents: Paywall.OnEvents? = nil) {
         guard !isPremium,
               let presenter = presenter ?? UIService.shared?.presenter
         else { return }
         
-        manager.showPaywallScreen(source: source, screen: screen, from: presenter, onEvents: onEvents)
+        manager.showPaywallScreen(source: source, screen: screen, from: presenter, customScreen: customScreen, onEvents: onEvents)
     }
     
     @MainActor

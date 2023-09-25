@@ -397,7 +397,6 @@ private extension Paywall.InitialVC {
   func updateProducts() -> Bool {
     var changed = false
     
-    //    let trial = imageType == .additional ? paywall?.productsList(for: .additionTrial).first : paywall?.productsList(for: .none).first
     var products = paywall.productsList()
     
     let trial = products.first(where: { $0.introductoryDiscount?.type == .introductory })
@@ -409,7 +408,6 @@ private extension Paywall.InitialVC {
     trialProduct = trial
     
     if let instProduct = products.first(where: { $0.introductoryDiscount == nil }) {
-      //      let instant = imageType == .additional ? paywall?.productsList(for: .additionInstant).first : instProduct
       let instant = instProduct
       changed = changed || instant != instantProduct
       instantProduct = instant

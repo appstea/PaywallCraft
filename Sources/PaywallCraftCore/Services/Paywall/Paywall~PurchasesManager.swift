@@ -11,6 +11,7 @@ import AppTrackingTransparency
 import AdSupport
 
 import RevenueCat
+import RevenueCatUI
 
 import Stored
 
@@ -52,7 +53,7 @@ extension Paywall {
     private let transactionsObserver = TransactionsObserver()
 
     private var currentOffering: Offering?
-      
+
     private var products: Set<StoreProduct> = [] {
       didSet { Notification.Paywall.Update.post(.products) }
     }
@@ -71,6 +72,8 @@ extension Paywall {
     private let isDebug: Bool
     private let rcSetup: RCSetup
 
+    private var onEvents: Paywall.OnEvents?
+      
     // MARK: - Init
 
     init(config: Config) {
@@ -98,15 +101,7 @@ extension Paywall {
     }
 
     // MARK: - Public
-    
-    func updatePremium(_ value: Bool) {
-       premium = value
-    }
-      
-    func isPossibleToShowCustomPaywall() -> Bool {
-        currentOffering?.paywall != nil
-    }
-
+          
     func createEvent() -> Paywall.Event { .init(isPremium: isPremium) }
     
     // MARK: - UI
@@ -128,8 +123,11 @@ extension Paywall {
     }
 
     @MainActor
-    func showPaywallScreen(source: some IPaywallSource, screen: some IPaywallScreen,
-                           from presenter: UIViewController, onEvents: Paywall.OnEvents? = nil) {
+    func showPaywallScreen(source: some IPaywallSource, 
+                           screen: some IPaywallScreen,
+                           from presenter: UIViewController,
+                           customScreen: Bool,
+                           onEvents: Paywall.OnEvents? = nil) {
       if let current = currentPaywallScreen {
         if current.source == source, current.screen == screen {
           return
@@ -137,10 +135,20 @@ extension Paywall {
 
         hideCurrentPaywallScreen(animated: true) { [weak self] in
           self?.showPaywallScreen(source: source, screen: screen,
-                                  from: presenter, onEvents: onEvents)
+                                  from: presenter, customScreen: customScreen, onEvents: onEvents)
         }
       }
 
+        if #available(iOS 15.0, *) {
+            if currentOffering?.paywall != nil && customScreen {
+                let controller = PaywallViewController(offering: nil)
+                controller.delegate = self
+                presenter.present(controller, animated: true)
+                self.onEvents = onEvents
+                return
+            }
+        }
+        
       let paywallVC = paywallScreen(source: source, screen: screen) { [weak self] in
         self?.currentPaywallScreen = nil
         onEvents?($0)
@@ -254,11 +262,29 @@ extension Paywall {
     func productsList() -> [StoreProduct] {
       Array(products)
     }
-
   }
 }
 
 // MARK: - Private
+
+extension Paywall.PurchasesManager: PaywallViewControllerDelegate {
+  
+  @available(iOS 15.0, *)
+  func paywallViewController(_ controller: PaywallViewController,
+                             didFinishPurchasingWith customerInfo: CustomerInfo) {
+      handleCustomerInfo(customerInfo)
+      onEvents?(.init(isPremium: premium))
+      controller.dismiss(animated: true)
+  }
+  
+  @available(iOS 15.0, *)
+  func paywallViewController(_ controller: PaywallViewController,
+                             didFinishRestoringWith customerInfo: CustomerInfo) {
+      handleCustomerInfo(customerInfo)
+      onEvents?(.init(isPremium: premium))
+      controller.dismiss(animated: true)
+  }
+}
 
 private extension Paywall.PurchasesManager {
 
@@ -292,10 +318,14 @@ private extension Paywall.PurchasesManager {
 //          self.products.insert(package.storeProduct)
 //        }
 //      }
-      
-      self.currentOffering = offerings?.current
+              
+        if let offering = offerings?.all.first(where: { $0.key == self.config.paywall.offering }) {
+            self.currentOffering = offering.value
+        } else {
+            self.currentOffering = offerings?.current
+        }
         
-      if let packages = offerings?.current?.availablePackages {
+      if let packages = self.currentOffering?.availablePackages {
         for package in packages {
           self.products.insert(package.storeProduct)
         }

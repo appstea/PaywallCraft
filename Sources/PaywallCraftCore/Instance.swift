@@ -119,27 +119,20 @@ final public class Instance: Cascade.AppDelegate {
   }
 
     @MainActor
-    public func showATT() async {
-      if UIService.shared?.checkIfATTAsked() == false {
-        let window = keyWindow
-        let vc = ATTRequestVC()
-        window.rootViewController = vc
-        window.makeKeyAndVisible()
-        await vc.result()
-      }
-    }
-      
-  public func updatePremium(_ value: Bool) {
-    Paywall.Service.shared?.updatePremium(value)
-  }
-    
-    public func isPossibleToShowCustomPaywall() -> Bool {
-        if let service = Paywall.Service.shared {
-            return service.isPossibleToShowCustomPaywall()
+    public func showATTIfPossible() async {
+        if config.att.fullScreen {
+            if UIService.shared?.checkIfATTAsked() == false {
+              let window = keyWindow
+              let vc = ATTRequestVC()
+              window.rootViewController = vc
+              window.makeKeyAndVisible()
+              await vc.result()
+            }
+        } else {
+            await UIService.shared?.checkIDFAAccessIfNeeded()
         }
-        return false
     }
-
+          
   // MARK: Paywall screens
 
   @MainActor
@@ -158,17 +151,14 @@ final public class Instance: Cascade.AppDelegate {
                             presenter: presenter(), onEvents: onEvents)
     }.build()
   }
-  
-  public func showPaywall() {
-    self.showPaywall(source: Paywall.Source.default, screen: Paywall.Screen.initial)
-  }
-  
+    
   public func showPaywall(source: some IPaywallSource,
                           screen: some IPaywallScreen,
                           from presenter: UIViewController? = nil,
+                          customScreen: Bool,
                           onEvents: Paywall.OnEvents? = nil) {
     Paywall.Service.shared?.showPaywall(source: source, screen: screen,
-                                        from: presenter, onEvents: onEvents)
+                                        from: presenter, customScreen: customScreen, onEvents: onEvents)
   }
   
   @MainActor
