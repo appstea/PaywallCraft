@@ -141,6 +141,8 @@ extension Paywall {
 
         if #available(iOS 15.0, *) {
             if currentOffering?.paywall != nil && customScreen {
+                Paywall.Service.shared?.updateAttribute(.paywall_source(source))
+
                 let controller = PaywallViewController(offering: nil)
                 controller.delegate = self
                 presenter.present(controller, animated: true)
