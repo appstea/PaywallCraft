@@ -147,6 +147,10 @@ extension Paywall {
                 controller.delegate = self
                 presenter.present(controller, animated: true)
                 self.onEvents = onEvents
+                
+                if let presenter = presenter as? UIViewControllerTransitioningDelegate {
+                  controller.transitioningDelegate = presenter
+                }
                 return
             }
         }
@@ -159,6 +163,10 @@ extension Paywall {
       currentPaywallScreen = paywallVC
       paywallVC.modalPresentationStyle = .overFullScreen
       presenter.present(paywallVC, animated: true)
+        
+      if let presenter = presenter as? UIViewControllerTransitioningDelegate {
+        paywallVC.transitioningDelegate = presenter
+      }
     }
 
     func hideCurrentPaywallScreen(animated: Bool = true, completion: (() -> Void)? = nil) {
