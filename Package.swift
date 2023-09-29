@@ -72,6 +72,7 @@ let package = Package(
               .product(name: "Reachability", package: "Reachability.swift"),
               .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
               .product(name: "FirebaseMessaging", package: "firebase-ios-sdk"),
+              .product(name: "FirebaseRemoteConfig", package: "firebase-ios-sdk"),
               .product(name: "Branch", package: "ios-branch-deep-linking-attribution"),
               .product(name: "AppsFlyerLib", package: "AppsFlyerFramework"),
             ],
