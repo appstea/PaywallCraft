@@ -125,7 +125,6 @@ extension Paywall {
         
         func application(_ application: UIApplication,
                          didFinishLaunchingWithOptions launchOptions: LaunchOptions? = nil) -> Bool {
-            observeSessions()
             if let idfv = UIDevice.current.identifierForVendor {
                 updateAttribute(.idfv(idfv.uuidString))
             }
@@ -187,19 +186,19 @@ extension Paywall {
         func showPaywall(source: some IPaywallSource, 
                          screen: some IPaywallScreen,
                          from presenter: UIViewController? = nil,
-                         customScreen: Bool,
+                         showData: Paywall.PaywallShowData,
                          onEvents: Paywall.OnEvents? = nil) {
             guard let sessionIdx = SessionService.current?.currentSessionIdx else { return }
             guard Thread.isMainThread else {
                 DispatchQueue.main.async { [weak self] in
-                    self?.showPaywall(source: source, screen: screen, from: presenter, customScreen: customScreen, onEvents: onEvents)
+                    self?.showPaywall(source: source, screen: screen, from: presenter, showData: showData, onEvents: onEvents)
                 }
                 return
             }
             
             let context = Context(sessionNumber: sessionIdx)
             _showPaywallScreen(source: source, screen: screen, context: context,
-                               from: presenter, customScreen: customScreen, onEvents: onEvents)
+                               from: presenter, showData: showData, onEvents: onEvents)
         }
         
         @MainActor
@@ -240,38 +239,22 @@ extension Paywall {
 // MARK: - Private
 
 private extension Paywall.Service {
-    
-    func observeSessions() {
-        //    Notification.Session.Change
-        //      .observe { [weak self] session in
-        //        guard let self = self,
-        //              !self.isPremium,
-        //              session > 0
-        //        else { return }
-        //
-        //        if session % $0.paywallShowSessionInterval == 0 && session != 1 {
-        //          self.showPaywall(source: .sessionStart, intent: .onStart)
-        //
-        //        }
-        //        else if (session == $0.offerShowSessionInterval || ((session - $0.offerShowSessionInterval)  % $0.offerShowSessionRepeat == 0)) && session != 1 {
-        //          self.showPaywall(source: .bottomUpsell, intent: .additionInstant, session: session)
-        //        }
-        //      }
-        //      .bind(to: self)
-    }
-    
     @MainActor
     func _showPaywallScreen(source: some IPaywallSource, 
                             screen: some IPaywallScreen,
                             context: Paywall.Context, 
                             from presenter: UIViewController? = nil,
-                            customScreen: Bool,
+                            showData: Paywall.PaywallShowData,
                             onEvents: Paywall.OnEvents? = nil) {
         guard !isPremium,
               let presenter = presenter ?? UIService.shared?.presenter
         else { return }
         
-        manager.showPaywallScreen(source: source, screen: screen, from: presenter, customScreen: customScreen, onEvents: onEvents)
+        manager.showPaywallScreen(source: source, 
+                                  screen: screen,
+                                  from: presenter,
+                                  showData: showData,
+                                  onEvents: onEvents)
     }
     
     @MainActor

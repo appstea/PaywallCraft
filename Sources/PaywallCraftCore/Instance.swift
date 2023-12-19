@@ -155,10 +155,10 @@ final public class Instance: Cascade.AppDelegate {
   public func showPaywall(source: some IPaywallSource,
                           screen: some IPaywallScreen,
                           from presenter: UIViewController? = nil,
-                          customScreen: Bool,
+                          showData: Paywall.PaywallShowData,
                           onEvents: Paywall.OnEvents? = nil) {
     Paywall.Service.shared?.showPaywall(source: source, screen: screen,
-                                        from: presenter, customScreen: customScreen, onEvents: onEvents)
+                                        from: presenter, showData: showData, onEvents: onEvents)
   }
   
   @MainActor

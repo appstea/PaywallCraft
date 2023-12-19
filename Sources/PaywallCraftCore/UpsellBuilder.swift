@@ -45,7 +45,7 @@ struct UpsellBuilder {
 
       Paywall.Service.shared?.showPaywall(
         source: ctx.source, screen: ctx.screen,
-        from: ctx.presenter, customScreen: false,
+        from: ctx.presenter, showData: .init(canShowRCPaywall: false, shouldWaitOfferingsToLoad: false),
         onEvents: ctx.onEvents
       )
     }
