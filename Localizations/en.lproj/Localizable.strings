@@ -69,7 +69,7 @@
 
 /* Full Access */
 "paywall.two_buttons.title"               = "Full Access";
-"permissions.button.continue"             = "Ok, I understand";
+"permissions.button.continue"             = "Continue";
 "permissions.feature.location.title"      = "Location Services";
 "permissions.feature.notifications.title" = "Notifications";
 "permissions.feature.motion_data.title"   = "Motion & Fitness";
