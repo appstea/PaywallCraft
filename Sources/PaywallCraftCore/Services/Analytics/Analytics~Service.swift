@@ -51,7 +51,6 @@ extension Analytics {
       }
       
       func addExternalLogger(_ logger: IAnalyticsLogger?) {
-          guard !externalLoggers.contains(logger) else { return }
           externalLoggers.append(logger)
       }
 
