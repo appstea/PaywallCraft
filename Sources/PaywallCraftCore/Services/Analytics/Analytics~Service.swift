@@ -42,7 +42,7 @@ extension Analytics {
     }
 
       func loggers() -> [IAnalyticsLogger?] {
-          let innerLoggers = [
+          let innerLoggers: [IAnalyticsLogger?] = [
             config.isOSLogEnabled ? OSLogger() : nil,
             config.isFirebaseEnabled ? FirebaseService.shared.map { _ in FIRLogger() } : nil,
             config.isBranchEnabled ? BranchService.shared.map { _ in BranchLogger() } : nil,
@@ -50,7 +50,7 @@ extension Analytics {
           return externalLoggers + innerLoggers
       }
       
-      func addExternalLogger(_ logger: IAnalyticsLogger) {
+      func addExternalLogger(_ logger: IAnalyticsLogger?) {
           guard !externalLoggers.contains(logger) else { return }
           externalLoggers.append(logger)
       }
@@ -68,7 +68,7 @@ public extension Analytics {
 
     private let transmitter: Transmitter
     private let config: Config
-    private weak var loggerProvider: LoggersProvider
+    private weak var loggerProvider: LoggersProvider?
 
     // MARK: - Init
 
