@@ -66,7 +66,7 @@ public extension Analytics {
 //      .subtracting(.default)
     private var didSendStartEventAtCurrentSession = false
 
-    let transmitter: Transmitter
+    public let transmitter: Transmitter
     private let config: Config
 
     // MARK: - Init
