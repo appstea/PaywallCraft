@@ -31,7 +31,7 @@ public extension Config {
 
 extension Analytics {
 
-  struct LoggersProvider: IAnalyticsLoggersProvider {
+  class LoggersProvider: IAnalyticsLoggersProvider {
 
     let config: Config.Analytics
       
@@ -66,8 +66,9 @@ public extension Analytics {
 //      .subtracting(.default)
     private var didSendStartEventAtCurrentSession = false
 
-    public let transmitter: Transmitter
+    private let transmitter: Transmitter
     private let config: Config
+    private weak var loggerProvider: LoggersProvider
 
     // MARK: - Init
 
@@ -78,7 +79,9 @@ public extension Analytics {
     
     private init(config: Config) {
       self.config = config
-      transmitter = Transmitter(provider: Analytics.LoggersProvider(config: config.analytics))
+      let loggerProvider = Analytics.LoggersProvider(config: config.analytics)
+      self.transmitter = Transmitter(provider: loggerProvider)
+      self.loggerProvider = loggerProvider
     }
 
     // MARK: - UIApplicationDelegate
@@ -157,6 +160,10 @@ public extension Analytics {
     public func send(_ event: IAnalyticsEvent) {
       transmitter.send(event)
     }
+      
+      public func addExternalLogger(_ logger: IAnalyticsLogger) {
+          loggerProvider?.addExternalLogger(logger)
+      }
 
 //    func sendStartLocalNotification(_ notification: LaunchItem.Notification) {
 //      if case .local = notification {
