@@ -34,16 +34,26 @@ extension Analytics {
   struct LoggersProvider: IAnalyticsLoggersProvider {
 
     let config: Config.Analytics
+      
+      private var externalLoggers: [IAnalyticsLogger?] = []
 
     init(config: Config.Analytics) {
       self.config = config
     }
 
-    func loggers() -> [IAnalyticsLogger?] {[
-      config.isOSLogEnabled ? OSLogger() : nil,
-      config.isFirebaseEnabled ? FirebaseService.shared.map { _ in FIRLogger() } : nil,
-      config.isBranchEnabled ? BranchService.shared.map { _ in BranchLogger() } : nil,
-    ]}
+      func loggers() -> [IAnalyticsLogger?] {
+          let innerLoggers = [
+            config.isOSLogEnabled ? OSLogger() : nil,
+            config.isFirebaseEnabled ? FirebaseService.shared.map { _ in FIRLogger() } : nil,
+            config.isBranchEnabled ? BranchService.shared.map { _ in BranchLogger() } : nil,
+          ]
+          return externalLoggers + innerLoggers
+      }
+      
+      func addExternalLogger(_ logger: IAnalyticsLogger) {
+          guard !externalLoggers.contains(logger) else { return }
+          externalLoggers.append(logger)
+      }
 
   }
 }
@@ -56,7 +66,7 @@ public extension Analytics {
 //      .subtracting(.default)
     private var didSendStartEventAtCurrentSession = false
 
-    private let transmitter: Transmitter
+    let transmitter: Transmitter
     private let config: Config
 
     // MARK: - Init
