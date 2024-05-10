@@ -349,11 +349,7 @@ private extension Paywall.PurchasesManager {
         Purchases.shared.getOfferings { [weak self] offerings, _ in
             guard let self = self else { return }
             
-            if let offering = offerings?.all.first(where: { $0.key == self.config.paywall.offering }) {
-                self.currentOffering = offering.value
-            } else {
-                self.currentOffering = offerings?.current
-            }
+            self.currentOffering = offerings?.current
             
             if let packages = self.currentOffering?.availablePackages {
                 for package in packages {
