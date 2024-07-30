@@ -70,10 +70,10 @@
 /* Full Access */
 "paywall.two_buttons.title"               = "Acesso total";
 "permissions.button.continue"             = "Ok, eu entendo";
-"permissions.feature.location.title"      = "";
-"permissions.feature.notifications.title" = "";
-"permissions.feature.motion_data.title"   = "";
-"permissions.feature.photos.title"        = "";
+"permissions.feature.location.title"      = "Serviços de Localização";
+"permissions.feature.notifications.title" = "Notificação";
+"permissions.feature.motion_data.title"   = "Movimento e Fitness";
+"permissions.feature.photos.title"        = "Fotos";
 "permissions.subtitle"                    = "Será possível se permitir o acesso a:";
 "permissions.title"                       = "Melhor experiência";
 "settings.contact_us.subtitle"            = "Gostaríamos muito de saber a sua opinião";
