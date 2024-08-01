@@ -57,8 +57,9 @@ extension Analytics {
   struct FIRLogger: IAnalyticsLogger {
 
     func sendEventIfNeeded(_ event: IAnalyticsEvent) {
-      guard let event = event as? IFIRAnalyticsEvent,
-            let firName = event.firName else { return }
+//      guard let event = event as? IFIRAnalyticsEvent,
+//            let firName = event.firName else { return }
+        print("qwerty sendEventIfNeeded")
         FirebaseService.shared?.test(st: "TEST EVENT")
 //      FirebaseAnalytics.Analytics.logEvent(firName, parameters: event.firParams)
     }

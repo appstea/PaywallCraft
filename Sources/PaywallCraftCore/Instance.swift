@@ -28,7 +28,7 @@ final public class Instance: Cascade.AppDelegate {
   fileprivate lazy var services: [AppService?] = [
     Analytics.Service.shared,
     SessionService.current,
-    //FirebaseService.shared,
+    FirebaseService.shared,
     UIService.shared,
     BranchService.shared,
     Paywall.Service.shared,
@@ -71,7 +71,7 @@ final public class Instance: Cascade.AppDelegate {
     self.config = config
     Analytics.Service.prepare(using: config)
     Paywall.Service.prepare(using: config)
-    //FirebaseService.prepare(using: config)
+    FirebaseService.prepare(using: config)
     BranchService.prepare(using: config)
     AppsflyerService.prepare(using: config)
 
