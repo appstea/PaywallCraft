@@ -18,4 +18,5 @@ open class AppService: NSObject, IAppService {
   public typealias UserInfoHandler = (UserInfo?) -> Swift.Void
   public typealias RestorationHandler = ([UIUserActivityRestoring]?) -> Swift.Void
 
+    public func test(st: String) {}
 }
