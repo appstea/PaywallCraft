@@ -71,7 +71,7 @@
 "paywall.two_buttons.title"               = "Acesso total";
 "permissions.button.continue"             = "Ok, eu entendo";
 "permissions.feature.location.title"      = "Serviços de Localização";
-"permissions.feature.notifications.title" = "Notificação";
+"permissions.feature.notifications.title" = "Notificações";
 "permissions.feature.motion_data.title"   = "Movimento e Fitness";
 "permissions.feature.photos.title"        = "Fotos";
 "permissions.subtitle"                    = "Será possível se permitir o acesso a:";
