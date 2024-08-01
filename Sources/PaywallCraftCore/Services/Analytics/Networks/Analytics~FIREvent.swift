@@ -7,63 +7,63 @@
 
 //import FirebaseAnalytics
 
-import AnalyticsCraft
-import Foundation
+//import AnalyticsCraft
+//import Foundation
+//
+//public protocol IFIRAnalyticsEvent: IAnalyticsEvent {
+//
+//  var firName: String? { get }
+//  var firParams: [String: Any]? { get }
+//
+//}
+//
+//fileprivate extension String {
+//
+//  var firebaseKey: String {
+//    capitalized
+//      .components(separatedBy: " ")
+//      .joined(separator: "_")
+//  }
+//
+//}
+//
+//public extension IFIRAnalyticsEvent {
+//
+//  var firName: String? { name.firebaseKey }
+//
+//  var firParams: [String: Any]? {
+//    guard let params = params, !params.isEmpty else { return nil }
+//
+//    var result = [String: Any](minimumCapacity: params.count)
+//    params.forEach { key, value in
+//      result[key.firebaseKey] = value
+//    }
+//    return result
+//  }
+//
+//}
+//
+//// MARK: - Paywall
+//
+//extension Analytics.Event.Paywall: IFIRAnalyticsEvent { }
+//
+//// MARK: - General
+//
+//extension Analytics.Event: IFIRAnalyticsEvent { }
 
-public protocol IFIRAnalyticsEvent: IAnalyticsEvent {
-
-  var firName: String? { get }
-  var firParams: [String: Any]? { get }
-
-}
-
-fileprivate extension String {
-
-  var firebaseKey: String {
-    capitalized
-      .components(separatedBy: " ")
-      .joined(separator: "_")
-  }
-
-}
-
-public extension IFIRAnalyticsEvent {
-
-  var firName: String? { name.firebaseKey }
-
-  var firParams: [String: Any]? {
-    guard let params = params, !params.isEmpty else { return nil }
-
-    var result = [String: Any](minimumCapacity: params.count)
-    params.forEach { key, value in
-      result[key.firebaseKey] = value
-    }
-    return result
-  }
-
-}
-
-// MARK: - Paywall
-
-extension Analytics.Event.Paywall: IFIRAnalyticsEvent { }
-
-// MARK: - General
-
-extension Analytics.Event: IFIRAnalyticsEvent { }
-
-// MARK: - Logger
-
-extension Analytics {
-
-  struct FIRLogger: IAnalyticsLogger {
-
-    func sendEventIfNeeded(_ event: IAnalyticsEvent) {
-//      guard let event = event as? IFIRAnalyticsEvent,
-//            let firName = event.firName else { return }
-//        
-        NotificationCenter.default.post(name: Notification.Name("MyModuleNotification"), object: event)
-      //FirebaseAnalytics.Analytics.logEvent(firName, parameters: event.firParams)
-    }
-
-  }
-}
+//// MARK: - Logger
+//
+//extension Analytics {
+//
+//  struct FIRLogger: IAnalyticsLogger {
+//
+//    func sendEventIfNeeded(_ event: IAnalyticsEvent) {
+////      guard let event = event as? IFIRAnalyticsEvent,
+////            let firName = event.firName else { return }
+////        
+//        NotificationCenter.default.post(name: Notification.Name("MyModuleNotification"), object: event)
+//      //FirebaseAnalytics.Analytics.logEvent(firName, parameters: event.firParams)
+//    }
+//
+//  }
+//}
