@@ -8,6 +8,7 @@
 //import FirebaseAnalytics
 
 import AnalyticsCraft
+import Foundation
 
 public protocol IFIRAnalyticsEvent: IAnalyticsEvent {
 
@@ -57,9 +58,10 @@ extension Analytics {
   struct FIRLogger: IAnalyticsLogger {
 
     func sendEventIfNeeded(_ event: IAnalyticsEvent) {
-      guard let event = event as? IFIRAnalyticsEvent,
-            let firName = event.firName else { return }
-
+//      guard let event = event as? IFIRAnalyticsEvent,
+//            let firName = event.firName else { return }
+//        
+        NotificationCenter.default.post(name: Notification.Name("MyModuleNotification"), object: event)
       //FirebaseAnalytics.Analytics.logEvent(firName, parameters: event.firParams)
     }
 
