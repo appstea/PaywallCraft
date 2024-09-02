@@ -90,7 +90,6 @@ extension Paywall {
             
             Purchases.logLevel = isDebug ? .debug : .warn
             let rcConfiguration = RevenueCat.Configuration.Builder(withAPIKey: config.paywall.apiKey)
-                .with(usesStoreKit2IfAvailable: false)
                 .build()
             Purchases.configure(with: rcConfiguration)
             
@@ -241,26 +240,17 @@ extension Paywall {
                 defer {
                     HUD.dismiss()
                 }
-                guard let transaction = transaction else {
-                    completion?(.failed)
-                    return
+                
+                guard error == nil else {
+                  completion?(.failed)
+                  return
                 }
                 
-                let result: PurchaseResult
-                switch transaction.sk1Transaction?.transactionState {
-                case .failed: result = .failed
-                case .deferred: result = .deferred
-                case .purchasing: result = .purchasing
-                case .purchased:
-                    result = .purchased(isTrial: product.introductoryDiscount?.paymentMode == .freeTrial)
-                case .restored:
-                    result = .restored(isTrial: product.introductoryDiscount?.paymentMode == .freeTrial)
-                default:
-                    result = error == nil ? .unknown : .failed
-                }
+                let hasActiveEntitlement = customerInfo?.entitlements.active.isEmpty == false
+                let isTrial = product.introductoryDiscount?.paymentMode == .freeTrial
+                let result: PurchaseResult = hasActiveEntitlement ? .purchased(isTrial: isTrial) : .failed
                 
                 if let self = self {
-                    let hasActiveEntitlement = customerInfo?.entitlements.active.isEmpty == false
                     self.premium = hasActiveEntitlement
                     
                     if !hasActiveEntitlement {

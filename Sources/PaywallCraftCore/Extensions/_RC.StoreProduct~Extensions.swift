@@ -13,135 +13,244 @@ import Utils
 import PaywallCraftResources
 
 extension StoreProduct {
-
-  /// $4.99
-  func localizedPrice() -> String { sk1Product?.localizedPrice() ?? "" }
-
-  /// $3.33 for $9.99 per quartal
-  func localizedUnitPrice() -> String { sk1Product?.localizedUnitPrice() ?? "" }
-
-  /// $4.99 per month
-  func localizedPricePerPeriod() -> String { sk1Product?.localizedPricePerPeriod() ?? "" }
-
-  /// $3.33 per month for 9.99$ per quartal
-  func localizedPricePerUnit() -> String { sk1Product?.localizedPricePerUnit() ?? "" }
-
-  /// $4.99/month
-  func localizedPriceSlashPeriod() -> String { sk1Product?.localizedPriceSlashPeriod() ?? "" }
-
-  /// $3.33/month for 9.99$ per quartal
-  func localizedPriceSlashPeriodUnit() -> String { sk1Product?.localizedPriceSlashPeriodUnit() ?? "" }
-
-  /// $0.99/month for 11.99$ per year
-  func localizedMonthlyPriceSlashMonth() -> String {
-    guard let pricePerMonth = pricePerMonth,
-          let product = sk1Product,
-          let localizedPrice = product.numberFormatter.string(from: pricePerMonth)
-    else { return "" }
-
-    let localizedPeriod = product.localizedPeriod(for: .month)
-    let result = L10n.Paywall.priceSlashPeriod(localizedPrice, localizedPeriod)
-    return result
-  }
-
-  func localizedPeriodUnit() -> String { sk1Product?.localizedPeriodUnit() ?? "" }
-
-  func localizedPeriod() -> String { sk1Product?.localizedPeriod() ?? "" }
-
-  func trialCount() -> Int { sk1Product?.trialCount() ?? 0 }
-
-}
-
-// MARK: - Private.SKProduct
-
-fileprivate extension SKProduct {
-
-  private static let numberFormatter = NumberFormatter {
-    $0.numberStyle = .currency
-    $0.formatterBehavior = .behavior10_4
-  }
-  var numberFormatter: NumberFormatter {
-    let result = Self.numberFormatter
-    result.locale = priceLocale
-    return result
-  }
-
   /// $4.99
   func localizedPrice() -> String {
-    numberFormatter.string(from: price) ?? ""
+    if #available(iOS 16, *) {
+      let locale = priceFormatter?.locale ?? .autoupdatingCurrent
+      return sk2Product?.localizedPrice(locale) ?? ""
+    } else {
+      return sk1Product?.localizedPrice() ?? ""
+    }
   }
-
+  
   /// $3.33 for $9.99 per quartal
   func localizedUnitPrice() -> String {
-    let unitPrice = price.dividing(by: .init(integerLiteral: subscriptionPeriod?.numberOfUnits ?? 1))
-    return numberFormatter.string(from: unitPrice) ?? ""
+    if #available(iOS 16, *) {
+      let locale = priceFormatter?.locale ?? .autoupdatingCurrent
+      return sk2Product?.localizedUnitPrice(locale) ?? ""
+    } else {
+      return sk1Product?.localizedUnitPrice() ?? ""
+    }
   }
-
+  
   /// $4.99 per month
   func localizedPricePerPeriod() -> String {
-    L10n.Paywall.pricePerPeriod(localizedPrice(), localizedPeriod())
+    if #available(iOS 16, *) {
+      let locale = priceFormatter?.locale ?? .autoupdatingCurrent
+      return sk2Product?.localizedPricePerPeriod(locale) ?? ""
+    } else {
+      return sk1Product?.localizedPricePerPeriod() ?? ""
+    }
   }
-
+  
   /// $3.33 per month for 9.99$ per quartal
   func localizedPricePerUnit() -> String {
-    L10n.Paywall.pricePerPeriod(localizedUnitPrice(), localizedPeriodUnit())
+    if #available(iOS 16, *) {
+      let locale = priceFormatter?.locale ?? .autoupdatingCurrent
+      return sk2Product?.localizedPricePerUnit(locale) ?? ""
+    } else {
+      return sk1Product?.localizedPricePerUnit() ?? ""
+    }
   }
-
+  
   /// $4.99/month
   func localizedPriceSlashPeriod() -> String {
-    L10n.Paywall.priceSlashPeriod(localizedPrice(), localizedPeriod())
+    if #available(iOS 16, *) {
+      let locale = priceFormatter?.locale ?? .autoupdatingCurrent
+      return sk2Product?.localizedPriceSlashPeriod(locale) ?? ""
+    } else {
+      return sk1Product?.localizedPriceSlashPeriod() ?? ""
+    }
   }
-
+  
   /// $3.33/month for 9.99$ per quartal
   func localizedPriceSlashPeriodUnit() -> String {
-    L10n.Paywall.priceSlashPeriod(localizedUnitPrice(), localizedPeriodUnit())
+    if #available(iOS 16, *) {
+      let locale = priceFormatter?.locale ?? .autoupdatingCurrent
+      return sk2Product?.localizedPriceSlashPeriodUnit(locale) ?? ""
+    } else {
+      return sk1Product?.localizedPriceSlashPeriodUnit() ?? ""
+    }
   }
-
+  
   func localizedPeriodUnit() -> String {
-    subscriptionPeriod?.map({ localizedPeriod(for: $0.unit) }) ?? ""
+    if #available(iOS 16, *) {
+      return sk2Product?.localizedPeriodUnit() ?? ""
+    } else {
+      return sk1Product?.localizedPeriodUnit() ?? ""
+    }
   }
+  
+  func localizedPeriod() -> String {
+    if #available(iOS 16, *) {
+      return sk2Product?.localizedPeriod() ?? ""
+    } else {
+      return sk1Product?.localizedPeriod() ?? ""
+    }
+  }
+  
+  func trialCount() -> Int {
+    if #available(iOS 16, *) {
+      return sk2Product?.trialCount() ?? 0
+    } else {
+      return sk1Product?.trialCount() ?? 0
+    }
+  }
+}
 
-  // MARK: - Utils
-
-  func localizedPeriod(for unit: SKProduct.PeriodUnit) -> String {
-    typealias L10n = PaywallCraftResources.L10n.Paywall.Period
-    switch unit {
-    case .day: return L10n.day
-    case .week: return L10n.week
-    case .month: return L10n.month
-    case .year: return L10n.year
+fileprivate extension SK2Product {
+  /// $4.99
+  func localizedPrice(_ priceLocale: Locale) -> String {
+    let numberFormatter = NumberFormatter.cached(format: .currency, locale: priceLocale)
+    numberFormatter.formatterBehavior = .behavior10_4
+    return numberFormatter.string(from: price as NSDecimalNumber) ?? ""
+  }
+  
+  /// $3.33 for $9.99 per quartal
+  func localizedUnitPrice(_ priceLocale: Locale) -> String {
+    let price = price as NSDecimalNumber
+    let unitPrice = price.dividing(by: .init(integerLiteral: subscription?.subscriptionPeriod.value ?? 1))
+    let numberFormatter = NumberFormatter.cached(format: .currency, locale: priceLocale)
+    numberFormatter.formatterBehavior = .behavior10_4
+    return numberFormatter.string(from: unitPrice) ?? ""
+  }
+  
+  /// $4.99 per month
+  func localizedPricePerPeriod(_ priceLocale: Locale) -> String {
+    L10n.Subs.pricePerPeriod(localizedPrice(priceLocale), localizedPeriod())
+  }
+  
+  /// $3.33 per month for 9.99$ per quartal
+  func localizedPricePerUnit(_ priceLocale: Locale) -> String {
+    L10n.Subs.pricePerPeriod(localizedUnitPrice(priceLocale), localizedPeriodUnit())
+  }
+  
+  /// $4.99/month
+  func localizedPriceSlashPeriod(_ priceLocale: Locale) -> String {
+    L10n.Subs.priceSlashPeriod(localizedPrice(priceLocale), localizedPeriod())
+  }
+  
+  /// $3.33/month for 9.99$ per quartal
+  func localizedPriceSlashPeriodUnit(_ priceLocale: Locale) -> String {
+    L10n.Subs.priceSlashPeriod(localizedUnitPrice(priceLocale), localizedPeriodUnit())
+  }
+  
+  func localizedPeriodUnit() -> String {
+    guard let subscriptionPeriod = subscription?.subscriptionPeriod else { return "" }
+    switch subscriptionPeriod.unit {
+    case .day: return L10n.Subs.Period.day
+    case .week: return L10n.Subs.Period.week
+    case .month: return L10n.Subs.Period.month
+    case .year: return L10n.Subs.Period.year
     @unknown default: return ""
     }
   }
-
+  
   func localizedPeriod() -> String {
-    subscriptionPeriod?.map {
-      typealias L10n = PaywallCraftResources.L10n.Paywall.Period
-      switch $0.unit {
-      case .day:
-        if $0.numberOfUnits == 7 {
-          return L10n.week
-        }
-        return L10n.day
-      case .week: return L10n.week
-      case .month:
-        if $0.numberOfUnits == 3 {
-          return L10n.quartal
-        }
-        return L10n.month
-      case .year: return L10n.year
-      @unknown default: return ""
+    guard let subscriptionPeriod = subscription?.subscriptionPeriod else { return "" }
+    switch subscriptionPeriod.unit {
+    case .day:
+      if subscriptionPeriod.value == 7 {
+        return L10n.Subs.Period.week
       }
-    } ?? ""
+      return L10n.Subs.Period.day
+    case .week: return L10n.Subs.Period.week
+    case .month:
+      if subscriptionPeriod.value == 3 {
+        return L10n.Subs.Period.quartal
+      }
+      return L10n.Subs.Period.month
+    case .year: return L10n.Subs.Period.year
+    @unknown default: return ""
+    }
   }
-
+  
   func trialCount() -> Int {
-    if introductoryPrice?.subscriptionPeriod.numberOfUnits == 1 {
+    if subscription?.introductoryOffer?.period.value == 1 {
       return 7
-    }
-    else {
-      return introductoryPrice?.subscriptionPeriod.numberOfUnits ?? 0
+    } else {
+      return subscription?.introductoryOffer?.period.value ?? 0
     }
   }
+}
+
+
+fileprivate extension SKProduct {
+
+    /// $4.99
+    func localizedPrice() -> String {
+        let numberFormatter = NumberFormatter.cached(format: .currency, locale: priceLocale)
+        numberFormatter.formatterBehavior = .behavior10_4
+        return numberFormatter.string(from: price) ?? ""
+    }
+
+    /// $3.33 for $9.99 per quartal
+    func localizedUnitPrice() -> String {
+        let unitPrice = price.dividing(by: .init(integerLiteral: subscriptionPeriod?.numberOfUnits ?? 1))
+        let numberFormatter = NumberFormatter.cached(format: .currency, locale: priceLocale)
+        numberFormatter.formatterBehavior = .behavior10_4
+        return numberFormatter.string(from: unitPrice) ?? ""
+    }
+
+    /// $4.99 per month
+    func localizedPricePerPeriod() -> String {
+        L10n.Subs.pricePerPeriod(localizedPrice(), localizedPeriod())
+    }
+
+    /// $3.33 per month for 9.99$ per quartal
+    func localizedPricePerUnit() -> String {
+        L10n.Subs.pricePerPeriod(localizedUnitPrice(), localizedPeriodUnit())
+    }
+
+    /// $4.99/month
+    func localizedPriceSlashPeriod() -> String {
+        L10n.Subs.priceSlashPeriod(localizedPrice(), localizedPeriod())
+    }
+
+    /// $3.33/month for 9.99$ per quartal
+    func localizedPriceSlashPeriodUnit() -> String {
+        L10n.Subs.priceSlashPeriod(localizedUnitPrice(), localizedPeriodUnit())
+    }
+
+    func localizedPeriodUnit() -> String {
+        subscriptionPeriod?.map {
+            switch $0.unit {
+            case .day: return L10n.Subs.Period.day
+            case .week: return L10n.Subs.Period.week
+            case .month: return L10n.Subs.Period.month
+            case .year: return L10n.Subs.Period.year
+            @unknown default: return ""
+            }
+        } ?? ""
+    }
+
+    func localizedPeriod() -> String {
+        subscriptionPeriod?.map {
+            switch $0.unit {
+            case .day:
+                if $0.numberOfUnits == 7 {
+                    return L10n.Subs.Period.week
+                }
+                return L10n.Subs.Period.day
+            case .week: return L10n.Subs.Period.week
+            case .month:
+                if $0.numberOfUnits == 3 {
+                    return L10n.Subs.Period.quartal
+                }
+                return L10n.Subs.Period.month
+            case .year: return L10n.Subs.Period.year
+            @unknown default: return ""
+            }
+        } ?? ""
+    }
+
+    func trialCount() -> Int {
+        if introductoryPrice?.subscriptionPeriod.numberOfUnits == 1 {
+            return 7
+        }
+        else {
+            return introductoryPrice?.subscriptionPeriod.numberOfUnits ?? 0
+        }
+    }
 
 }
