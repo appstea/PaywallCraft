@@ -102,8 +102,6 @@ extension StoreProduct {
 fileprivate extension SK2Product {
   /// $4.99
   func localizedPrice(_ priceLocale: Locale) -> String {
-    let numberFormatter = NumberFormatter.cached(format: .currency, locale: priceLocale)
-    numberFormatter.formatterBehavior = .behavior10_4
     return numberFormatter.string(from: price as NSDecimalNumber) ?? ""
   }
   
@@ -111,8 +109,6 @@ fileprivate extension SK2Product {
   func localizedUnitPrice(_ priceLocale: Locale) -> String {
     let price = price as NSDecimalNumber
     let unitPrice = price.dividing(by: .init(integerLiteral: subscription?.subscriptionPeriod.value ?? 1))
-    let numberFormatter = NumberFormatter.cached(format: .currency, locale: priceLocale)
-    numberFormatter.formatterBehavior = .behavior10_4
     return numberFormatter.string(from: unitPrice) ?? ""
   }
   
@@ -180,16 +176,12 @@ fileprivate extension SKProduct {
 
     /// $4.99
     func localizedPrice() -> String {
-        let numberFormatter = NumberFormatter.cached(format: .currency, locale: priceLocale)
-        numberFormatter.formatterBehavior = .behavior10_4
         return numberFormatter.string(from: price) ?? ""
     }
 
     /// $3.33 for $9.99 per quartal
     func localizedUnitPrice() -> String {
         let unitPrice = price.dividing(by: .init(integerLiteral: subscriptionPeriod?.numberOfUnits ?? 1))
-        let numberFormatter = NumberFormatter.cached(format: .currency, locale: priceLocale)
-        numberFormatter.formatterBehavior = .behavior10_4
         return numberFormatter.string(from: unitPrice) ?? ""
     }
 
