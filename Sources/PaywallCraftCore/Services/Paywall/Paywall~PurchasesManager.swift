@@ -96,9 +96,6 @@ extension Paywall {
             if #available(iOS 14.3, *) {
                 Purchases.shared.attribution.enableAdServicesAttributionTokenCollection()
             }
-            else {
-                Purchases.automaticAppleSearchAdsAttributionCollection = true
-            }
             Purchases.shared.delegate = self
             
             SKPaymentQueue.default().add(transactionsObserver)
