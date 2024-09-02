@@ -98,6 +98,7 @@ extension StoreProduct {
   }
 }
 
+@available(iOS 15.0, *)
 fileprivate extension SK2Product {
   /// $4.99
   func localizedPrice(_ priceLocale: Locale) -> String {
