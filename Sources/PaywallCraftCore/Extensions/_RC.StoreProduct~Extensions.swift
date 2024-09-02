@@ -117,31 +117,31 @@ fileprivate extension SK2Product {
   
   /// $4.99 per month
   func localizedPricePerPeriod(_ priceLocale: Locale) -> String {
-    L10n.Subs.pricePerPeriod(localizedPrice(priceLocale), localizedPeriod())
+    L10n.Paywall.pricePerPeriod(localizedPrice(priceLocale), localizedPeriod())
   }
   
   /// $3.33 per month for 9.99$ per quartal
   func localizedPricePerUnit(_ priceLocale: Locale) -> String {
-    L10n.Subs.pricePerPeriod(localizedUnitPrice(priceLocale), localizedPeriodUnit())
+    L10n.Paywall.pricePerPeriod(localizedUnitPrice(priceLocale), localizedPeriodUnit())
   }
   
   /// $4.99/month
   func localizedPriceSlashPeriod(_ priceLocale: Locale) -> String {
-    L10n.Subs.priceSlashPeriod(localizedPrice(priceLocale), localizedPeriod())
+    L10n.Paywall.priceSlashPeriod(localizedPrice(priceLocale), localizedPeriod())
   }
   
   /// $3.33/month for 9.99$ per quartal
   func localizedPriceSlashPeriodUnit(_ priceLocale: Locale) -> String {
-    L10n.Subs.priceSlashPeriod(localizedUnitPrice(priceLocale), localizedPeriodUnit())
+    L10n.Paywall.priceSlashPeriod(localizedUnitPrice(priceLocale), localizedPeriodUnit())
   }
   
   func localizedPeriodUnit() -> String {
     guard let subscriptionPeriod = subscription?.subscriptionPeriod else { return "" }
     switch subscriptionPeriod.unit {
-    case .day: return L10n.Subs.Period.day
-    case .week: return L10n.Subs.Period.week
-    case .month: return L10n.Subs.Period.month
-    case .year: return L10n.Subs.Period.year
+    case .day: return L10n.day
+    case .week: return L10n.week
+    case .month: return L10n.month
+    case .year: return L10n.year
     @unknown default: return ""
     }
   }
@@ -151,16 +151,16 @@ fileprivate extension SK2Product {
     switch subscriptionPeriod.unit {
     case .day:
       if subscriptionPeriod.value == 7 {
-        return L10n.Subs.Period.week
+        return L10n.week
       }
-      return L10n.Subs.Period.day
-    case .week: return L10n.Subs.Period.week
+      return L10n.day
+    case .week: return L10n.week
     case .month:
       if subscriptionPeriod.value == 3 {
-        return L10n.Subs.Period.quartal
+        return L10n.quartal
       }
-      return L10n.Subs.Period.month
-    case .year: return L10n.Subs.Period.year
+      return L10n.month
+    case .year: return L10n.year
     @unknown default: return ""
     }
   }
@@ -194,31 +194,31 @@ fileprivate extension SKProduct {
 
     /// $4.99 per month
     func localizedPricePerPeriod() -> String {
-        L10n.Subs.pricePerPeriod(localizedPrice(), localizedPeriod())
+        L10n.Paywall.pricePerPeriod(localizedPrice(), localizedPeriod())
     }
 
     /// $3.33 per month for 9.99$ per quartal
     func localizedPricePerUnit() -> String {
-        L10n.Subs.pricePerPeriod(localizedUnitPrice(), localizedPeriodUnit())
+        L10n.Paywall.pricePerPeriod(localizedUnitPrice(), localizedPeriodUnit())
     }
 
     /// $4.99/month
     func localizedPriceSlashPeriod() -> String {
-        L10n.Subs.priceSlashPeriod(localizedPrice(), localizedPeriod())
+        L10n.Paywall.priceSlashPeriod(localizedPrice(), localizedPeriod())
     }
 
     /// $3.33/month for 9.99$ per quartal
     func localizedPriceSlashPeriodUnit() -> String {
-        L10n.Subs.priceSlashPeriod(localizedUnitPrice(), localizedPeriodUnit())
+        L10n.Paywall.priceSlashPeriod(localizedUnitPrice(), localizedPeriodUnit())
     }
 
     func localizedPeriodUnit() -> String {
         subscriptionPeriod?.map {
             switch $0.unit {
-            case .day: return L10n.Subs.Period.day
-            case .week: return L10n.Subs.Period.week
-            case .month: return L10n.Subs.Period.month
-            case .year: return L10n.Subs.Period.year
+            case .day: return L10n.day
+            case .week: return L10n.week
+            case .month: return L10n.month
+            case .year: return L10n.year
             @unknown default: return ""
             }
         } ?? ""
@@ -229,16 +229,16 @@ fileprivate extension SKProduct {
             switch $0.unit {
             case .day:
                 if $0.numberOfUnits == 7 {
-                    return L10n.Subs.Period.week
+                    return L10n.week
                 }
-                return L10n.Subs.Period.day
-            case .week: return L10n.Subs.Period.week
+                return L10n.day
+            case .week: return L10n.week
             case .month:
                 if $0.numberOfUnits == 3 {
-                    return L10n.Subs.Period.quartal
+                    return L10n.quartal
                 }
-                return L10n.Subs.Period.month
-            case .year: return L10n.Subs.Period.year
+                return L10n.month
+            case .year: return L10n.year
             @unknown default: return ""
             }
         } ?? ""
