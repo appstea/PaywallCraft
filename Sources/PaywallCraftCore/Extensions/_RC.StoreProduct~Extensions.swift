@@ -80,7 +80,7 @@ extension StoreProduct {
     var localizedPrice = ""
     var localizedPeriod = ""
     if #available(iOS 16, *) {
-        localizedPrice = sk2Product?.numberFormatter.string(from: pricePerMonth) ?? ""
+        localizedPrice = priceFormatter?.string(from: pricePerMonth) ?? ""
         localizedPeriod = sk2Product?.localizedPeriod(for: .month) ?? ""
     } else {
         localizedPrice = sk1Product?.numberFormatter.string(from: pricePerMonth) ?? ""
@@ -123,8 +123,14 @@ fileprivate extension SK2Product {
     $0.formatterBehavior = .behavior10_4
   }
     
+  var numberFormatter: NumberFormatter {
+    let result = Self.numberFormatter
+    return result
+  }
+    
   /// $4.99
   func localizedPrice(_ priceLocale: Locale) -> String {
+    numberFormatter.locale = priceLocale
     return numberFormatter.string(from: price as NSDecimalNumber) ?? ""
   }
   
@@ -132,6 +138,7 @@ fileprivate extension SK2Product {
   func localizedUnitPrice(_ priceLocale: Locale) -> String {
     let price = price as NSDecimalNumber
     let unitPrice = price.dividing(by: .init(integerLiteral: subscription?.subscriptionPeriod.value ?? 1))
+    numberFormatter.locale = priceLocale
     return numberFormatter.string(from: unitPrice) ?? ""
   }
   
@@ -207,6 +214,12 @@ fileprivate extension SKProduct {
     private static let numberFormatter = NumberFormatter {
       $0.numberStyle = .currency
       $0.formatterBehavior = .behavior10_4
+    }
+      
+    var numberFormatter: NumberFormatter {
+      let result = Self.numberFormatter
+      result.locale = priceLocale
+      return result
     }
 
     /// $4.99
