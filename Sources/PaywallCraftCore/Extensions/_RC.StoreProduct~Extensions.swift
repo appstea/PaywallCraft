@@ -274,7 +274,7 @@ fileprivate extension SKProduct {
 
     func localizedPeriod() -> String {
         typealias L10n = PaywallCraftResources.L10n.Paywall.Period
-        subscriptionPeriod?.map {
+        return subscriptionPeriod?.map {
             switch $0.unit {
             case .day:
                 if $0.numberOfUnits == 7 {
