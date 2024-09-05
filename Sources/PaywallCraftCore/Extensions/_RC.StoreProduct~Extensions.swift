@@ -72,6 +72,24 @@ extension StoreProduct {
       return sk1Product?.localizedPriceSlashPeriodUnit() ?? ""
     }
   }
+    
+  /// $0.99/month for 11.99$ per year
+  func localizedMonthlyPriceSlashMonth() -> String {
+    guard let pricePerMonth = pricePerMonth else { return "" }
+        
+    var localizedPrice = ""
+    var localizedPeriod = ""
+    if #available(iOS 16, *) {
+        localizedPrice = sk2Product?.numberFormatter.string(from: pricePerMonth) ?? ""
+        localizedPeriod = sk2Product?.localizedPeriod(for: .month) ?? ""
+    } else {
+        localizedPrice = sk1Product?.numberFormatter.string(from: pricePerMonth) ?? ""
+        localizedPeriod = sk1Product?.localizedPeriod(for: .month) ?? ""
+    }
+        
+    let result = L10n.Paywall.priceSlashPeriod(localizedPrice, localizedPeriod)
+    return result
+  }
   
   func localizedPeriodUnit() -> String {
     if #available(iOS 16, *) {
@@ -100,6 +118,11 @@ extension StoreProduct {
 
 @available(iOS 15.0, *)
 fileprivate extension SK2Product {
+  private static let numberFormatter = NumberFormatter {
+    $0.numberStyle = .currency
+    $0.formatterBehavior = .behavior10_4
+  }
+    
   /// $4.99
   func localizedPrice(_ priceLocale: Locale) -> String {
     return numberFormatter.string(from: price as NSDecimalNumber) ?? ""
@@ -133,8 +156,15 @@ fileprivate extension SK2Product {
   }
   
   func localizedPeriodUnit() -> String {
-    guard let subscriptionPeriod = subscription?.subscriptionPeriod else { return "" }
-    switch subscriptionPeriod.unit {
+    guard let period = subscription?.subscriptionPeriod else { return ""}
+    return localizedPeriod(for: period.unit)
+  }
+
+    // MARK: - Utils
+
+  func localizedPeriod(for unit: Product.SubscriptionPeriod.Unit) -> String {
+    typealias L10n = PaywallCraftResources.L10n.Paywall.Period
+    switch unit {
     case .day: return L10n.day
     case .week: return L10n.week
     case .month: return L10n.month
@@ -173,6 +203,11 @@ fileprivate extension SK2Product {
 
 
 fileprivate extension SKProduct {
+    
+    private static let numberFormatter = NumberFormatter {
+      $0.numberStyle = .currency
+      $0.formatterBehavior = .behavior10_4
+    }
 
     /// $4.99
     func localizedPrice() -> String {
@@ -206,15 +241,21 @@ fileprivate extension SKProduct {
     }
 
     func localizedPeriodUnit() -> String {
-        subscriptionPeriod?.map {
-            switch $0.unit {
-            case .day: return L10n.day
-            case .week: return L10n.week
-            case .month: return L10n.month
-            case .year: return L10n.year
-            @unknown default: return ""
-            }
-        } ?? ""
+      guard let period = subscriptionPeriod else { return ""}
+      return localizedPeriod(for: period.unit)
+    }
+
+    // MARK: - Utils
+
+    func localizedPeriod(for unit: SKProduct.PeriodUnit) -> String {
+      typealias L10n = PaywallCraftResources.L10n.Paywall.Period
+      switch unit {
+      case .day: return L10n.day
+      case .week: return L10n.week
+      case .month: return L10n.month
+      case .year: return L10n.year
+      @unknown default: return ""
+      }
     }
 
     func localizedPeriod() -> String {
@@ -245,5 +286,4 @@ fileprivate extension SKProduct {
             return introductoryPrice?.subscriptionPeriod.numberOfUnits ?? 0
         }
     }
-
 }
