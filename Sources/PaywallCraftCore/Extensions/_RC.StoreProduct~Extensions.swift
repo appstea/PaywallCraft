@@ -181,6 +181,7 @@ fileprivate extension SK2Product {
   }
   
   func localizedPeriod() -> String {
+    typealias L10n = PaywallCraftResources.L10n.Paywall.Period
     guard let subscriptionPeriod = subscription?.subscriptionPeriod else { return "" }
     switch subscriptionPeriod.unit {
     case .day:
@@ -272,6 +273,7 @@ fileprivate extension SKProduct {
     }
 
     func localizedPeriod() -> String {
+        typealias L10n = PaywallCraftResources.L10n.Paywall.Period
         subscriptionPeriod?.map {
             switch $0.unit {
             case .day:
