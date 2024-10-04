@@ -40,12 +40,12 @@ extension Analytics {
     init(config: Config.Analytics) {
       self.config = config
     }
-
+      
       func loggers() -> [IAnalyticsLogger?] {
           let innerLoggers: [IAnalyticsLogger?] = [
             config.isOSLogEnabled ? OSLogger() : nil,
-            //config.isFirebaseEnabled ? FirebaseService.shared.map { _ in FIRLogger() } : nil,
-            config.isBranchEnabled ? BranchService.shared.map { _ in BranchLogger() } : nil,
+            //            config.isFirebaseEnabled ? FirebaseService.shared.map { _ in FIRLogger() } : nil,
+            //            config.isBranchEnabled ? BranchService.shared.map { _ in BranchLogger() } : nil,
           ]
           return externalLoggers + innerLoggers
       }

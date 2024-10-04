@@ -37,15 +37,6 @@
       }
     },
     {
-      "identity" : "ios-branch-deep-linking-attribution",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/BranchMetrics/ios-branch-deep-linking-attribution",
-      "state" : {
-        "revision" : "9310f0af16d1f1dcb7fbfcaa893e822b1768c33e",
-        "version" : "1.43.2"
-      }
-    },
-    {
       "identity" : "notificationcraft",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/dDomovoj/NotificationCraft.git",
