@@ -17,14 +17,11 @@ public extension Config {
   struct Analytics {
     let isOSLogEnabled: Bool
     let isFirebaseEnabled: Bool
-    let isBranchEnabled: Bool
 
     public init(isOSLogEnabled: Bool? = nil,
-                isFirebaseEnabled: Bool? = nil,
-                isBranchEnabled: Bool? = nil) {
+                isFirebaseEnabled: Bool? = nil) {
       self.isOSLogEnabled = isOSLogEnabled ?? true
       self.isFirebaseEnabled = isFirebaseEnabled ?? true
-      self.isBranchEnabled = isBranchEnabled ?? true
     }
   }
 }
@@ -41,8 +38,7 @@ extension Analytics {
 
     func loggers() -> [IAnalyticsLogger?] {[
       config.isOSLogEnabled ? OSLogger() : nil,
-      config.isFirebaseEnabled ? FirebaseService.shared.map { _ in FIRLogger() } : nil,
-      config.isBranchEnabled ? BranchService.shared.map { _ in BranchLogger() } : nil,
+      config.isFirebaseEnabled ? FirebaseService.shared.map { _ in FIRLogger() } : nil
     ]}
 
   }

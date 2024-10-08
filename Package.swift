@@ -40,7 +40,6 @@ let package = Package(
       .package(url: "https://github.com/RevenueCat/purchases-ios.git", .upToNextMajor(from: "5.0.0")),
       .package(url: "https://github.com/ashleymills/Reachability.swift", branch: "master"),
       .package(url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "10.25.0")),
-      .package(url: "https://github.com/BranchMetrics/ios-branch-deep-linking-attribution", .upToNextMajor(from: "1.42.0")),
       .package(url: "https://github.com/sereivoanyong/SVProgressHUD.git", branch: "master"),
       .package(url: "https://github.com/AppsFlyerSDK/AppsFlyerFramework", branch: "master"),
     ],
@@ -73,7 +72,6 @@ let package = Package(
               .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
               .product(name: "FirebaseMessaging", package: "firebase-ios-sdk"),
               .product(name: "FirebaseRemoteConfig", package: "firebase-ios-sdk"),
-              .product(name: "Branch", package: "ios-branch-deep-linking-attribution"),
               .product(name: "AppsFlyerLib", package: "AppsFlyerFramework"),
             ],
             linkerSettings: [

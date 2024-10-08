@@ -30,7 +30,6 @@ final public class Instance: Cascade.AppDelegate {
     SessionService.current,
     FirebaseService.shared,
     UIService.shared,
-    BranchService.shared,
     Paywall.Service.shared,
     NotificationService.shared,
     AppsflyerService.shared
@@ -72,7 +71,6 @@ final public class Instance: Cascade.AppDelegate {
     Analytics.Service.prepare(using: config)
     Paywall.Service.prepare(using: config)
     FirebaseService.prepare(using: config)
-    BranchService.prepare(using: config)
     AppsflyerService.prepare(using: config)
 
     super.init()
