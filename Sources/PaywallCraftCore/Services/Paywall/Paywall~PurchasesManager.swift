@@ -125,32 +125,42 @@ extension Paywall {
         }
         
         @MainActor
-        func showPaywallScreen(source: some IPaywallSource,
-                               screen: some IPaywallScreen,
-                               from presenter: UIViewController,
-                               showData: PaywallShowData,
-                               onEvents: Paywall.OnEvents? = nil) {
-            if let current = currentPaywallScreen {
-                if current.source == source, current.screen == screen {
-                    return
-                }
-                
-                hideCurrentPaywallScreen(animated: true) { [weak self] in
-                    self?.showPaywallScreen(source: source, screen: screen,
-                                            from: presenter, showData: showData, onEvents: onEvents)
-                }
-            }
-            
-            if currentOffering == nil && showData.shouldWaitOfferingsToLoad { return }
-            
-            if #available(iOS 15.0, *) {
-                if showRCPaywallIfPossible(showData: showData, from: presenter, source: source, onEvents: onEvents) == false {
-                    showOurPaywall(source: source, screen: screen, from: presenter, onEvents: onEvents)
-                }
-            } else {
-                showOurPaywall(source: source, screen: screen, from: presenter, onEvents: onEvents)
-            }
+      func showPaywallScreen(isNeedShowOurPaywall: Bool,
+                             source: some IPaywallSource,
+                             screen: some IPaywallScreen,
+                             from presenter: UIViewController,
+                             showData: PaywallShowData,
+                             onEvents: Paywall.OnEvents? = nil) {
+        if let current = currentPaywallScreen {
+          if current.source == source, current.screen == screen {
+            return
+          }
+          
+          hideCurrentPaywallScreen(animated: true) { [weak self] in
+            self?.showPaywallScreen(
+              isNeedShowOurPaywall: isNeedShowOurPaywall,
+              source: source,
+              screen: screen,
+              from: presenter,
+              showData: showData,
+              onEvents: onEvents)
+          }
         }
+        
+        if currentOffering == nil && showData.shouldWaitOfferingsToLoad { return }
+        
+        if isNeedShowOurPaywall {
+          self.showOurPaywall(source: source, screen: screen, from: presenter, onEvents: onEvents)
+        } else {
+          if #available(iOS 15.0, *) {
+            if showRCPaywallIfPossible(showData: showData, from: presenter, source: source, onEvents: onEvents) == false {
+              self.showOurPaywall(source: source, screen: screen, from: presenter, onEvents: onEvents)
+            }
+          } else {
+            self.showOurPaywall(source: source, screen: screen, from: presenter, onEvents: onEvents)
+          }
+        }
+      }
         
         @available(iOS 15.0, *)
         private func showRCPaywallIfPossible(showData: PaywallShowData,

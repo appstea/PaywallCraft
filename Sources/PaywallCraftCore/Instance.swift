@@ -134,28 +134,30 @@ final public class Instance: Cascade.AppDelegate {
   // MARK: Paywall screens
 
   @MainActor
-  public func upsell(from presenter: UIViewController) -> UpsellView {
-    self.upsell(source: Paywall.Source.bottomUpsell, screen: Paywall.Screen.initial,
+  public func upsell(isNeedShowOurPaywall: Bool, from presenter: UIViewController) -> UpsellView {
+    self.upsell(isNeedShowOurPaywall: isNeedShowOurPaywall, source: Paywall.Source.bottomUpsell, screen: Paywall.Screen.initial,
                 from: presenter, onEvents: nil)
   }
   
   @MainActor
-  public func upsell(source: some IPaywallSource,
+  public func upsell(isNeedShowOurPaywall: Bool,
+                     source: some IPaywallSource,
                      screen: some IPaywallScreen,
                      from presenter: @escaping @autoclosure () -> UIViewController,
                      onEvents: Paywall.OnEvents? = nil) -> UpsellView {
     UpsellBuilder(config: config.ui.upsell) {
-      UpsellBuilder.ShowCtx(source: source, screen: screen,
+      UpsellBuilder.ShowCtx(isNeedShowOurPaywall: isNeedShowOurPaywall, source: source, screen: screen,
                             presenter: presenter(), onEvents: onEvents)
     }.build()
   }
     
-  public func showPaywall(source: some IPaywallSource,
+  public func showPaywall(isNeedShowOurPaywall: Bool,
+                          source: some IPaywallSource,
                           screen: some IPaywallScreen,
                           from presenter: UIViewController? = nil,
                           showData: Paywall.PaywallShowData,
                           onEvents: Paywall.OnEvents? = nil) {
-    Paywall.Service.shared?.showPaywall(source: source, screen: screen,
+    Paywall.Service.shared?.showPaywall(isNeedShowOurPaywall: isNeedShowOurPaywall, source: source, screen: screen,
                                         from: presenter, showData: showData, onEvents: onEvents)
   }
   
