@@ -24,7 +24,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-      .package(url: "https://github.com/dDomovoj/Cascade.git", branch: "master"),
+      .package(url: "https://github.com/dDomovoj/Cascade.git", branch: "main"),
       .package(url: "https://github.com/dDomovoj/NotificationCraft.git", branch: "master"),
       .package(url: "https://github.com/dDomovoj/AnalyticsCraft.git", branch: "master"),
       .package(url: "https://github.com/dDomovoj/Stored.git", branch: "master"),

@@ -32,8 +32,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/dDomovoj/Cascade.git",
       "state" : {
-        "branch" : "master",
-        "revision" : "55744cd06e3434c7bb308d2f27109185980892d4"
+        "branch" : "main",
+        "revision" : "7bedececdea8da5b87be587aefb0a2b051b00f75"
       }
     },
     {
