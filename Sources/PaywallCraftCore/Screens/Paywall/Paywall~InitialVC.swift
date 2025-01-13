@@ -73,10 +73,10 @@ extension Paywall {
     //      return CGSize(width: w, height: h)
     //    }))
     
-    public var title = L10n.Paywall.TwoButtons.title
+    public var title = L10n.Paywall.TwoButtons.subtitle
     public var titleColor = Color.Paywall.title.color
     
-    public var subtitle = L10n.Paywall.TwoButtons.subtitle
+    public var subtitle = L10n.Paywall.TwoButtons.title
     public var subtitleColor = Color.Paywall.infoTitle.color
     
     public var text = L10n.Paywall.TwoButtons.text
@@ -251,7 +251,13 @@ extension Paywall {
       $0.textAlignment = isRTL ? .right : .left
       $0.verticalAlignment = .top
     }
-    
+    fileprivate let noPaymentTextLabel = Label {
+      $0.textColor = Color.Main.text.color
+      $0.setDynamicFont(font: .systemFont(ofSize: 14.ui, weight: .regular))
+      $0.numberOfLines = 1
+      $0.textAlignment = .center
+      $0.text = "subs.noPaymentLabel.text".localized
+    }
     fileprivate let trialButton = UIBase.Button {
       $0.titleLabel?.adjustsFontSizeToFitWidth = true
       $0.titleLabel?.minimumScaleFactor = 0.75
@@ -425,6 +431,9 @@ private extension Paywall.InitialVC {
       24.floating
       textLabel.vComponent
       40.floating
+      noPaymentTextLabel.vComponent
+        .alignment(.center)
+      5.floating
       trialButton.vComponent
         .height(.fixed(Const.ctaButtonSize.height))
         .width(.fixed(Const.ctaButtonSize.width))
