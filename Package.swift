@@ -7,7 +7,7 @@ let package = Package(
     name: "PaywallCraft",
     defaultLocalization: "en",
     platforms: [
-      .iOS(.v13),
+      .iOS(.v15),
     ],
     products: [
         .library(
@@ -37,10 +37,8 @@ let package = Package(
       .package(url: "https://github.com/dDomovoj/PermissionsKit", .upToNextMajor(from: "9.0.2")),
       .package(url: "https://github.com/layoutBox/PinLayout", .upToNextMajor(from: "1.10.3")),
       .package(url: "https://github.com/dDomovoj/StackCraft.git", .upToNextMajor(from: "0.3.3")),
-      .package(url: "https://github.com/RevenueCat/purchases-ios.git", .upToNextMajor(from: "4.43.3")),
+      .package(url: "https://github.com/RevenueCat/purchases-ios.git", .upToNextMajor(from: "5.16.1")),
       .package(url: "https://github.com/ashleymills/Reachability.swift", branch: "master"),
-//      .package(url: "https://github.com/firebase/firebase-ios-sdk.git", .upToNextMajor(from: "10.24.0")),
-//      .package(url: "https://github.com/BranchMetrics/ios-branch-deep-linking-attribution", .upToNextMajor(from: "1.42.0")),
       .package(url: "https://github.com/sereivoanyong/SVProgressHUD.git", branch: "master"),
       .package(url: "https://github.com/AppsFlyerSDK/AppsFlyerFramework", branch: "master"),
     ],
@@ -70,10 +68,6 @@ let package = Package(
               .product(name: "RevenueCat", package: "purchases-ios"),
               .product(name: "RevenueCatUI", package: "purchases-ios"),
               .product(name: "Reachability", package: "Reachability.swift"),
-//              .product(name: "FirebaseAnalytics", package: "firebase-ios-sdk"),
-//              .product(name: "FirebaseMessaging", package: "firebase-ios-sdk"),
-//              .product(name: "FirebaseRemoteConfig", package: "firebase-ios-sdk"),
-//              .product(name: "Branch", package: "ios-branch-deep-linking-attribution"),
               .product(name: "AppsFlyerLib", package: "AppsFlyerFramework"),
             ],
             linkerSettings: [
