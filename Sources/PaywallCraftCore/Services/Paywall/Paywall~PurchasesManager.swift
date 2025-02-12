@@ -90,7 +90,7 @@ extension Paywall {
             
             Purchases.logLevel = isDebug ? .debug : .warn
             let rcConfiguration = RevenueCat.Configuration.Builder(withAPIKey: config.paywall.apiKey)
-                .with(usesStoreKit2IfAvailable: false)
+                .with(storeKitVersion: .storeKit1)
                 .build()
             Purchases.configure(with: rcConfiguration)
             
