@@ -20,17 +20,13 @@ final public class Scene: Cascade.SceneDelegate {
   public override func targets() -> [UISceneDelegate] {
     instance?.services.compactMap { $0 } ?? []
   }
-
 }
 
 final public class Instance: Cascade.AppDelegate {
-
   fileprivate lazy var services: [AppService?] = [
     Analytics.Service.shared,
     SessionService.current,
-//    FirebaseService.shared,
     UIService.shared,
-//    BranchService.shared,
     Paywall.Service.shared,
     NotificationService.shared,
     AppsflyerService.shared
@@ -136,31 +132,26 @@ final public class Instance: Cascade.AppDelegate {
   // MARK: Paywall screens
 
   @MainActor
-  public func upsell(isNeedShowOurPaywall: Bool, from presenter: UIViewController) -> UpsellView {
-    self.upsell(isNeedShowOurPaywall: isNeedShowOurPaywall, source: Paywall.Source.bottomUpsell, screen: Paywall.Screen.initial,
-                from: presenter, onEvents: nil)
+  public func upsell(from presenter: UIViewController) -> UpsellView {
+    self.upsell(source: Paywall.Source.bottomUpsell, screen: Paywall.Screen.initial, from: presenter, onEvents: nil)
   }
   
   @MainActor
-  public func upsell(isNeedShowOurPaywall: Bool,
-                     source: some IPaywallSource,
+  public func upsell(source: some IPaywallSource,
                      screen: some IPaywallScreen,
                      from presenter: @escaping @autoclosure () -> UIViewController,
                      onEvents: Paywall.OnEvents? = nil) -> UpsellView {
     UpsellBuilder(config: config.ui.upsell) {
-      UpsellBuilder.ShowCtx(isNeedShowOurPaywall: isNeedShowOurPaywall, source: source, screen: screen,
-                            presenter: presenter(), onEvents: onEvents)
+      UpsellBuilder.ShowCtx(source: source, screen: screen, presenter: presenter(), onEvents: onEvents)
     }.build()
   }
     
-  public func showPaywall(isNeedShowOurPaywall: Bool,
-                          source: some IPaywallSource,
+  public func showPaywall(source: some IPaywallSource,
                           screen: some IPaywallScreen,
                           from presenter: UIViewController? = nil,
                           showData: Paywall.PaywallShowData,
                           onEvents: Paywall.OnEvents? = nil) {
-    Paywall.Service.shared?.showPaywall(isNeedShowOurPaywall: isNeedShowOurPaywall, source: source, screen: screen,
-                                        from: presenter, showData: showData, onEvents: onEvents)
+    Paywall.Service.shared?.showPaywall(source: source, screen: screen, from: presenter, showData: showData, onEvents: onEvents)
   }
   
   @MainActor
@@ -172,9 +163,7 @@ final public class Instance: Cascade.AppDelegate {
 }
 
 // MARK: - Private
-
 private extension Instance {
-  
   func subscribeOnPaywallEvents() {
     Notification.Paywall.Update.observe(on: .main) { [weak self] e in
       switch e {
@@ -183,5 +172,4 @@ private extension Instance {
       }
     }.bind(to: self)
   }
-  
 }

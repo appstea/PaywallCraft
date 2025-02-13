@@ -183,8 +183,7 @@ extension Paywall {
         }
         
       /// main thread-trampolined
-      func showPaywall(isNeedShowOurPaywall: Bool,
-                       source: some IPaywallSource,
+      func showPaywall(source: some IPaywallSource,
                        screen: some IPaywallScreen,
                        from presenter: UIViewController? = nil,
                        showData: Paywall.PaywallShowData,
@@ -192,13 +191,13 @@ extension Paywall {
         guard let sessionIdx = SessionService.current?.currentSessionIdx else { return }
         guard Thread.isMainThread else {
           DispatchQueue.main.async { [weak self] in
-            self?.showPaywall(isNeedShowOurPaywall: isNeedShowOurPaywall, source: source, screen: screen, from: presenter, showData: showData, onEvents: onEvents)
+            self?.showPaywall(source: source, screen: screen, from: presenter, showData: showData, onEvents: onEvents)
           }
           return
         }
         
         let context = Context(sessionNumber: sessionIdx)
-        _showPaywallScreen(isNeedShowOurPaywall: isNeedShowOurPaywall, source: source, screen: screen, context: context,
+        _showPaywallScreen(source: source, screen: screen, context: context,
                            from: presenter, showData: showData, onEvents: onEvents)
       }
         
@@ -241,8 +240,7 @@ extension Paywall {
 
 private extension Paywall.Service {
   @MainActor
-  func _showPaywallScreen(isNeedShowOurPaywall: Bool,
-                          source: some IPaywallSource,
+  func _showPaywallScreen(source: some IPaywallSource,
                           screen: some IPaywallScreen,
                           context: Paywall.Context,
                           from presenter: UIViewController? = nil,
@@ -252,8 +250,7 @@ private extension Paywall.Service {
           let presenter = presenter ?? UIService.shared?.presenter
     else { return }
     
-    manager.showPaywallScreen(isNeedShowOurPaywall: isNeedShowOurPaywall,
-                              source: source,
+    manager.showPaywallScreen(source: source,
                               screen: screen,
                               from: presenter,
                               showData: showData,

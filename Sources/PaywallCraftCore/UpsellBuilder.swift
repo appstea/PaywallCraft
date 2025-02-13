@@ -11,27 +11,25 @@ import PaywallCraftUI
 import NotificationCraftSystem
 
 public extension Config.UI {
-
   typealias Upsell = UpsellView.ViewModel
-  
 }
 
 struct UpsellBuilder {
 
   struct ShowCtx {
-    let isNeedShowOurPaywall: Bool
     let source: any IPaywallSource
     let screen: any IPaywallScreen
     let presenter: UIViewController
     let onEvents: Paywall.OnEvents?
 
-    public init(isNeedShowOurPaywall: Bool, source: some IPaywallSource, screen: some IPaywallScreen,
-                presenter: UIViewController, onEvents: Paywall.OnEvents?) {
+    public init(source: some IPaywallSource,
+                screen: some IPaywallScreen,
+                presenter: UIViewController,
+                onEvents: Paywall.OnEvents?) {
       self.source = source
       self.screen = screen
       self.presenter = presenter
       self.onEvents = onEvents
-      self.isNeedShowOurPaywall = isNeedShowOurPaywall
     }
   }
 
@@ -44,12 +42,12 @@ struct UpsellBuilder {
 
     result.onClick = {
       guard let ctx = showContext() else { return }
-
-      Paywall.Service.shared?.showPaywall(
-        isNeedShowOurPaywall: ctx.isNeedShowOurPaywall,
-        source: ctx.source, screen: ctx.screen,
-        from: ctx.presenter, showData: .init(canShowRCPaywall: false, shouldWaitOfferingsToLoad: false),
-        onEvents: ctx.onEvents
+      
+      Paywall.Service.shared?.showPaywall(source: ctx.source,
+                                          screen: ctx.screen,
+                                          from: ctx.presenter,
+                                          showData: .init(canShowRCPaywall: false, shouldWaitOfferingsToLoad: false),
+                                          onEvents: ctx.onEvents
       )
     }
 
