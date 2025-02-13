@@ -167,7 +167,7 @@ extension Paywall {
                                              source: some IPaywallSource,
                                              onEvents: Paywall.OnEvents? = nil) -> Bool {
           debugPrint("[DEBUG] RCPaywall \(currentOffering?.paywall)")
-            if currentOffering?.paywall != nil {
+//            if currentOffering?.paywall != nil {
                 Paywall.Service.shared?.updateAttribute(.paywall_source(source))
                 
                 let controller = PaywallViewController(offering: nil)
@@ -180,9 +180,9 @@ extension Paywall {
                 }
               debugPrint("[DEBUG] RCPaywall true")
                 return true
-            }
-          debugPrint("[DEBUG] RCPaywall false")
-            return false
+//            }
+//          debugPrint("[DEBUG] RCPaywall false")
+//            return false
         }
         
         @MainActor
