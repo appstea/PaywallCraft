@@ -112,7 +112,7 @@ extension Paywall {
         
         // MARK: - Init
         
-        private (set) static var shared: Paywall.Service?
+        private(set) static var shared: Paywall.Service?
         static func prepare(using config: Config) {
             shared = .init(config: config)
         }
