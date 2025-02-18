@@ -37,7 +37,7 @@ let package = Package(
       .package(url: "https://github.com/dDomovoj/PermissionsKit", .upToNextMajor(from: "9.0.2")),
       .package(url: "https://github.com/layoutBox/PinLayout", .upToNextMajor(from: "1.10.3")),
       .package(url: "https://github.com/dDomovoj/StackCraft.git", .upToNextMajor(from: "0.3.3")),
-      .package(url: "https://github.com/RevenueCat/purchases-ios.git", .upToNextMajor(from: "5.16.1")),
+      .package(url: "https://github.com/RevenueCat/purchases-ios.git", .upToNextMajor(from: "5.17.0")),
       .package(url: "https://github.com/ashleymills/Reachability.swift", branch: "master"),
       .package(url: "https://github.com/sereivoanyong/SVProgressHUD.git", branch: "master"),
       .package(url: "https://github.com/AppsFlyerSDK/AppsFlyerFramework", branch: "master"),
