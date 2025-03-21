@@ -334,6 +334,9 @@ fileprivate extension Permissions.ViewController {
 private extension Permissions.ViewController {
 
   func onContinue() {
+    let generator = UIImpactFeedbackGenerator(style: .light)
+    generator.impactOccurred()
+    
     continueTask?.cancel()
     continueTask = Task {
       await requestPermissions()
