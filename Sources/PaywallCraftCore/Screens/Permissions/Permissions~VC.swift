@@ -100,7 +100,12 @@ extension Permissions {
     ]
     fileprivate var resolvedPermissions: [Permission] {
       permissions
-        .filter { $0.type != .motion }
+        .filter { permission in
+          if (isCatalyst || isMacDesignedForPad) && permission.type == .motion {
+            return false
+          }
+          return true
+        }
         .sorted { lhs, rhs in
           if lhs.type.isAny(of: .locationAlways, .locationWhenInUse) { return false }
           if rhs.type.isAny(of: .locationAlways, .locationWhenInUse) { return true }
