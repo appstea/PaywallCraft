@@ -48,10 +48,10 @@
     {
       "identity" : "permissionskit",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/dDomovoj/PermissionsKit",
+      "location" : "https://github.com/sparrowcode/PermissionsKit",
       "state" : {
-        "revision" : "409deeb9be1b599a3fc6f67641e0c0b3f0baf849",
-        "version" : "9.0.2"
+        "revision" : "5e5935998cf9c44033e429c3b7d1dd176a1f55ad",
+        "version" : "11.1.0"
       }
     },
     {

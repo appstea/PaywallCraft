@@ -34,7 +34,7 @@ let package = Package(
       .package(url: "https://github.com/dDomovoj/CallbacksCraft.git", branch: "master"),
 
       .package(url: "https://github.com/eddiekaiger/SwiftyAttributes", branch: "master"),
-      .package(url: "https://github.com/dDomovoj/PermissionsKit", .upToNextMajor(from: "9.0.2")),
+      .package(url: "https://github.com/sparrowcode/PermissionsKit", .upToNextMajor(from: "11.0.0")),
       .package(url: "https://github.com/layoutBox/PinLayout", .upToNextMajor(from: "1.10.3")),
       .package(url: "https://github.com/dDomovoj/StackCraft.git", .upToNextMajor(from: "0.3.3")),
       .package(url: "https://github.com/RevenueCat/purchases-ios.git", .upToNextMajor(from: "5.17.0")),
@@ -58,8 +58,7 @@ let package = Package(
               .product(name: "Utils", package: "Utils"),
 
               .product(name: "NotificationPermission", package: "PermissionsKit"),
-              .product(name: "LocationWhenInUsePermission", package: "PermissionsKit"),
-              .product(name: "LocationAlwaysPermission", package: "PermissionsKit"),
+              .product(name: "LocationPermission", package: "PermissionsKit"),
               .product(name: "MotionPermission", package: "PermissionsKit"),
               .product(name: "PhotoLibraryPermission", package: "PermissionsKit"),
               

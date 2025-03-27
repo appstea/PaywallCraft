@@ -93,10 +93,10 @@ extension Permissions {
       
     }
     public var permissions: [Permission] = [
-      Permission.Defaults.notifications,
       Permission.Defaults.locationAlways,
       Permission.Defaults.photos,
       Permission.Defaults.motion,
+      Permission.Defaults.notifications,
     ]
     fileprivate var resolvedPermissions: [Permission] {
       permissions
@@ -105,11 +105,6 @@ extension Permissions {
             return false
           }
           return true
-        }
-        .sorted { lhs, rhs in
-          if lhs.type.isAny(of: .locationAlways, .locationWhenInUse) { return false }
-          if rhs.type.isAny(of: .locationAlways, .locationWhenInUse) { return true }
-          return false
         }
     }
     public var cta = L10n.Permissions.Button.continue

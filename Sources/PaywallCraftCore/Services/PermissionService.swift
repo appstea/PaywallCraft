@@ -9,9 +9,9 @@ import Foundation
 import PermissionsKit
 import NotificationPermission
 import PhotoLibraryPermission
-import LocationAlwaysPermission
-import LocationWhenInUsePermission
+import LocationPermission
 import MotionPermission
+import CoreLocation
 
 enum PermissionService {
   
@@ -47,29 +47,41 @@ extension PermissionService {
     
     private func requestPermission(for permission: Permission) async -> Status {
       await withCheckedContinuation { c in
-        let type = permission
-        let permission: PermissionsKit.Permission
-        switch type {
-        case .locationAlways: permission = LocationAlwaysPermission()
-        case .locationWhenInUse: permission = LocationWhenInUsePermission()
-        case .notifications: permission = NotificationPermission()
-        case .motion: permission = MotionPermission()
-        case .photos: permission = PhotoLibraryPermission()
-        }
-        
-        let shouldSkipResponse = type.isAny(of: .locationWhenInUse, .locationAlways)
-        permission.request {
-          if shouldSkipResponse { return }
+        DispatchQueue.main.async {
+          let type = permission
+          let permission: PermissionsKit.Permission
           
-          c.resume(returning: permission.status.domain)
-        }
-        
-        if shouldSkipResponse {
-          c.resume(returning: permission.status.domain)
+          switch type {
+          case .locationAlways, .locationWhenInUse:
+            let locationPermission = PermissionsKit.Permission.location(access: .always)
+            locationPermission.request {
+              let status = CLLocationManager().authorizationStatus
+              let domainStatus: Status = (status == .authorizedAlways || status == .authorizedWhenInUse) ? .authorized : .denied
+              debugPrint("[DEBUG] requestPermission location")
+              c.resume(returning: domainStatus)
+            }
+          case .notifications:
+            permission = PermissionsKit.Permission.notification()
+            permission.request {
+              debugPrint("[DEBUG] requestPermission notifications")
+              c.resume(returning: permission.status.domain)
+            }
+          case .photos:
+            permission = PhotoLibraryPermission()
+            permission.request {
+              debugPrint("[DEBUG] requestPermission photos")
+              c.resume(returning: permission.status.domain)
+            }
+          case .motion:
+            permission = MotionPermission()
+            permission.request {
+              debugPrint("[DEBUG] requestPermission motion")
+              c.resume(returning: permission.status.domain)
+            }
+          }
         }
       }
     }
-    
   }
 }
 
@@ -102,9 +114,9 @@ extension PermissionService {
       let type = permission
       let permission: PermissionsKit.Permission
       switch type {
-      case .locationAlways: permission = LocationAlwaysPermission()
-      case .locationWhenInUse: permission = LocationWhenInUsePermission()
-      case .notifications: permission = NotificationPermission()
+      case .locationAlways: permission = PermissionsKit.Permission.location(access: .always)
+      case .locationWhenInUse: permission = PermissionsKit.Permission.location(access: .whenInUse)
+      case .notifications: permission = PermissionsKit.Permission.notification()
       case .motion: permission = MotionPermission()
       case .photos: permission = PhotoLibraryPermission()
       }
@@ -121,10 +133,8 @@ fileprivate extension PermissionsKit.Permission.Status {
   var domain: PermissionService.Status {
     switch self {
     case .authorized: return .authorized
-    case .notDetermined,
-        .notSupported: return .notDetermined
+    case .notDetermined, .notSupported: return .notDetermined
     case .denied: return .denied
     }
   }
-  
 }
