@@ -36,7 +36,7 @@
 
 "paywall.additional_offer.subtitle" = "Aquí hay una oferta:";
 
-"paywall.additional_offer.text_format" = "Se puede elegir entre un período de prueba más largo (es decir, 7 días en lugar de 3) y pagar incluso menos por trimestre. Prueba 7 días gratis, luego %%@. Obtenga todas las funciones premium. ¡No se pierda esta oferta por tiempo limitado!";
+"paywall.additional_offer.text_format" = "Se puede elegir entre un período de prueba más largo (es decir, 7 días en lugar de 3) y pagar incluso menos por trimestre. Prueba 7 días gratis, luego %@. Obtenga todas las funciones premium. ¡No se pierda esta oferta por tiempo limitado!";
 
 "paywall.additional_offer.title" = "¿No decidido?";
 
@@ -56,11 +56,11 @@
 
 "paywall.one_button.feature.second" = "Eliminar anuncios";
 
-"paywall.one_button.price" = "¡Suscribirse por %%@/%%@!";
+"paywall.one_button.price" = "¡Suscribirse por %@/%@!";
 
 "paywall.one_button.title" = "Acceso ilimitado";
 
-"paywall.one_button.trial.actual" = "Después %%@ por %%@";
+"paywall.one_button.trial.actual" = "Después %@ por %@";
 
 "paywall.one_button.trial.free" = "Prueba gratuita de %lld días";
 
@@ -74,19 +74,19 @@
 
 "paywall.period.year" = "año";
 
-"paywall.price_per_period" = "%%@ por %%@";
+"paywall.price_per_period" = "%@ por %@";
 
-"paywall.price_slash_period" = "%%@/%%@";
+"paywall.price_slash_period" = "%@/%@";
 
 "paywall.try_free_and_subscribe" = "Pruéba gratis y suscríbete";
 
-"paywall.two_buttons.info_just" = "Por solo %%@";
+"paywall.two_buttons.info_just" = "Por solo %@";
 
 "paywall.two_buttons.subtitle" = "Prueba gratuita";
 
 "paywall.two_buttons.text" = "Disfruta de todas las características de la aplicación sin publicidad. Pruébala gratis sin compromiso (puedes cancelar en cualquier momento).";
 
-"paywall.two_buttons.text_format" = "Disfruta de todas las características de la aplicación sin publicidad. Prueba %lld días gratis, luego %%@. Sin compromiso. Cancele en cualquier momento.";
+"paywall.two_buttons.text_format" = "Disfruta de todas las características de la aplicación sin publicidad. Prueba %lld días gratis, luego %@. Sin compromiso. Cancele en cualquier momento.";
 
 "paywall.two_buttons.title" = "Acceso total";
 
@@ -125,3 +125,4 @@
 "settings.share.subtitle" = "Con ayuda de su mensajero favorito";
 
 "settings.share_app.title" = "Compartir app";
+

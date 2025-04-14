@@ -1,90 +1,128 @@
-"apple.login.signout"                     = "Log out";
-"att.request.cta"                         = "Ok, I understand";
-"att.request.description.first"           = "For a better user experience";
-"att.request.description.second"          = "For content that aligns with your interests";
-"att.request.note"                        = "You can always review your decision and make changes in settings at any time";
-"att.request.title"                       = "Enable tracking";
-"check.internet.title"                    = "Please, check your internet connection and try again later";
-"default_upsell.title"                    = "Premium\nUnlock & enjoy";
-"default_upsell.upgrade.title"            = "UPGRADE";
-"general.button.back"                     = "Back";
-"general.button.close"                    = "Close";
-"general.button.done"                     = "Done";
-"general.button.ok"                       = "Ok";
-"general.button.retry"                    = "Retry";
-"no_internet.subtitle"                    = "No internet connection, try later";
-"no_internet.title"                       = "Ooops";
-"no_mail_app.subtitle"                    = "You don't have Mail app";
-"no_mail_app.title"                       = "Ooops";
+"apple.login.signout" = "Log out";
 
-/* Here is an offer for you: */
-"paywall.additional_offer.subtitle"       = "Here is an offer for you:";
+"att.request.cta" = "Ok, I understand";
 
-/* You can choose between a longer trial period (that’s 7 days instead of 3) and paying even less per quarter. Try 7 days free, then $6.99 per month. Get all the premium features. Don’t miss this limited time deal! */
-"paywall.additional_offer.text_format"    = "You can choose between a longer trial period (that’s 7 days instead of 3) and paying even less per quarter. Try 7 days free, then %@. Get all the premium features. Don’t miss this limited time deal!";
+"att.request.description.first" = "For a better user experience";
 
-/* Not convinced? */
-"paywall.additional_offer.title"          = "Not convinced?";
-"paywall.button.no_internet"              = "Remind me when internet connection is back";
-"paywall.button.privacy"                  = "Privacy";
-"paywall.button.restore"                  = "Restore";
-"paywall.button.terms"                    = "Terms";
-"paywall.one_button.button.close"         = "or continue with a limited version";
-"paywall.one_button.button.continue"      = "Continue";
-"paywall.one_button.feature.first"        = "Enjoy all features of the app";
-"paywall.one_button.feature.second"       = "Remove ads";
-"paywall.one_button.price"                = "subscribe for %@ per %@";
-"paywall.one_button.title"                = "Unlimited access\nto all features";
-"paywall.one_button.trial.actual"         = "Then %@ per %@";
-"paywall.one_button.trial.free"           = "%d days trial";
-"paywall.period.day"                      = "day";
-"paywall.period.month"                    = "month";
-"paywall.period.quartal"                  = "quarter";
-"paywall.period.week"                     = "week";
-"paywall.period.year"                     = "year";
+"att.request.description.second" = "For content that aligns with your interests";
 
-/* $9.99 per quarter */
-"paywall.price_per_period"                = "%@ per %@";
+"att.request.note" = "You can always review your decision and make changes in settings at any time";
 
-/* $3.33/month */
-"paywall.price_slash_period"              = "%@/%@";
+"att.request.title" = "Enable tracking";
 
-/* Try Free and Subscribe */
-"paywall.try_free_and_subscribe"          = "Try Free and Subscribe";
+"check.internet.title" = "Please, check your internet connection and try again later";
 
-/* That’s just $3.33/month */
-"paywall.two_buttons.info_just"           = "That's just %@";
+"default_upsell.title" = "Premium\nUnlock & enjoy";
 
-/* Try For Free */
-"paywall.two_buttons.subtitle"            = "Try for Free";
-"subs.noPaymentLabel.text" = "No payment due now!";
+"default_upsell.upgrade.title" = "UPGRADE";
 
-/* Enjoy all features of the app ad free and make sure that all new features are unlocked for you to use. Try for free. No commitment. Cancel anytime. */
-"paywall.two_buttons.text"                = "Enjoy all features of the app ad free and make sure that all new features are unlocked for you to use. Try for free. No commitment. Cancel anytime.";
+"general.button.back" = "Back";
 
-/* Enjoy all features of the app ad free and make sure that all new features are unlocked for you to use. Try 3 days free, then $4.99 per month. No commitment. Cancel anytime. */
-"paywall.two_buttons.text_format"         = "Enjoy all features of the app ad free and make sure that all new features are unlocked for you to use. Try %d days free, then %@. No commitment. Cancel anytime.";
+"general.button.close" = "Close";
 
-/* Enjoy all features of the app ad free and make sure that all new features are unlocked for you to use. Try 3 days free, then $4.99 per month. No commitment. Cancel anytime. */
-"paywall.two_buttons.text_format7"        = "Enjoy all features of the app ad free and make sure that all new features are unlocked for you to use. Try %d days free, then %@. No commitment. Cancel anytime.";
+"general.button.done" = "Done";
 
-/* Full Access */
-"paywall.two_buttons.title"               = "Full Access";
-"permissions.button.continue"             = "Continue";
-"permissions.feature.location.title"      = "Location Services";
+"general.button.ok" = "Ok";
+
+"general.button.retry" = "Retry";
+
+"no_internet.subtitle" = "No internet connection, try later";
+
+"no_internet.title" = "Ooops";
+
+"no_mail_app.subtitle" = "You don't have Mail app";
+
+"no_mail_app.title" = "Ooops";
+
+"paywall.additional_offer.subtitle" = "Here is an offer for you:";
+
+"paywall.additional_offer.text_format" = "You can choose between a longer trial period (that’s 7 days instead of 3) and paying even less per quarter. Try 7 days free, then %@. Get all the premium features. Don’t miss this limited time deal!";
+
+"paywall.additional_offer.title" = "Not convinced?";
+
+"paywall.button.no_internet" = "Remind me when internet connection is back";
+
+"paywall.button.privacy" = "Privacy";
+
+"paywall.button.restore" = "Restore";
+
+"paywall.button.terms" = "Terms";
+
+"paywall.one_button.button.close" = "or continue with a limited version";
+
+"paywall.one_button.button.continue" = "Continue";
+
+"paywall.one_button.feature.first" = "Enjoy all features of the app";
+
+"paywall.one_button.feature.second" = "Remove ads";
+
+"paywall.one_button.price" = "subscribe for %@ per %@";
+
+"paywall.one_button.title" = "Unlimited access\nto all features";
+
+"paywall.one_button.trial.actual" = "Then %@ per %@";
+
+"paywall.one_button.trial.free" = "%lld days trial";
+
+"paywall.period.day" = "day";
+
+"paywall.period.month" = "month";
+
+"paywall.period.quartal" = "quarter";
+
+"paywall.period.week" = "week";
+
+"paywall.period.year" = "year";
+
+"paywall.price_per_period" = "%@ per %@";
+
+"paywall.price_slash_period" = "%@/%@";
+
+"paywall.try_free_and_subscribe" = "Try Free and Subscribe";
+
+"paywall.two_buttons.info_just" = "That's just %@";
+
+"paywall.two_buttons.subtitle" = "Try For Free";
+
+"paywall.two_buttons.text" = "Enjoy all features of the app ad free and make sure that all new features are unlocked for you to use. Try for free. No commitment. Cancel anytime.";
+
+"paywall.two_buttons.text_format" = "Enjoy all features of the app ad free and make sure that all new features are unlocked for you to use. Try %lld days free, then %@. No commitment. Cancel anytime.";
+
+"paywall.two_buttons.title" = "Full Access";
+
+"permissions.button.continue" = "Ok, I understand";
+
+"permissions.feature.location.title" = "Location Services";
+
+"permissions.feature.motion_data.title" = "Motion & Fitness";
+
 "permissions.feature.notifications.title" = "Notifications";
-"permissions.feature.motion_data.title"   = "Motion & Fitness";
-"permissions.feature.photos.title"        = "Photos";
-"permissions.subtitle"                    = "Will be possible if you grant access to:";
-"permissions.title"                       = "Best app experience";
-"settings.contact_us.subtitle"            = "We would love to hear from you";
-"settings.contact_us.title"               = "Contact Us";
-"settings.help_support.section.title"     = "Help & Support";
-"settings.privacy.subtitle"               = "And other legal texts";
-"settings.privacy.title"                  = "Privacy Policy";
-"settings.rateapp.title"                  = "Rate the App";
-"settings.restore_fail.subtitle"          = "Sorry, it looks like you don't have any purchases ";
-"settings.restore.subtitle"               = "We’ll find stuff you have already bought";
-"settings.restore.title"                  = "Restore Purchases";
-"settings.share_app.title"                = "Share App";
-"settings.share.subtitle"                 = "Share via your favorite messenger";
+
+"permissions.feature.photos.title" = "Photos";
+
+"permissions.subtitle" = "Will be possible if you grant access to:";
+
+"permissions.title" = "Best app experience";
+
+"settings.contact_us.subtitle" = "We would love to hear from you";
+
+"settings.contact_us.title" = "Contact Us";
+
+"settings.help_support.section.title" = "Help & Support";
+
+"settings.privacy.subtitle" = "And other legal texts";
+
+"settings.privacy.title" = "Privacy Policy";
+
+"settings.rateapp.title" = "Rate the App";
+
+"settings.restore.subtitle" = "We’ll find stuff you have already bought";
+
+"settings.restore.title" = "Restore Purchases";
+
+"settings.restore_fail.subtitle" = "Sorry, it looks like you don't have any purchases";
+
+"settings.share.subtitle" = "Share via your favorite messenger";
+
+"settings.share_app.title" = "Share App";
+
