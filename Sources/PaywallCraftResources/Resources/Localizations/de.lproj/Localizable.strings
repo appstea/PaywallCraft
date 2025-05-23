@@ -1,90 +1,128 @@
-"apple.login.signout"                     = "";
-"att.request.cta"                         = "";
-"att.request.description.first"           = "";
-"att.request.description.second"          = "";
-"att.request.note"                        = "";
-"att.request.title"                       = "";
-"check.internet.title"                    = "";
-"default_upsell.title"                    = "";
-"default_upsell.upgrade.title"            = "";
-"general.button.back"                     = "";
-"general.button.close"                    = "";
-"general.button.done"                     = "";
-"general.button.ok"                       = "";
-"general.button.retry"                    = "";
-"no_internet.subtitle"                    = "";
-"no_internet.title"                       = "";
-"no_mail_app.subtitle"                    = "";
-"no_mail_app.title"                       = "";
+"apple.login.signout" = "Ausloggen";
 
-/* Here is an offer for you: */
-"paywall.additional_offer.subtitle"       = "";
+"att.request.cta" = "Ok, ich verstehe";
 
-/* You can choose between a longer trial period (that’s 7 days instead of 3) and paying even less per quarter. Try 7 days free, then $6.99 per month. Get all the premium features. Don’t miss this limited time deal! */
-"paywall.additional_offer.text_format"    = "";
+"att.request.description.first" = "Für ein besseres Benutzererlebnis";
 
-/* Not convinced? */
-"paywall.additional_offer.title"          = "";
-"paywall.button.no_internet"              = "";
-"paywall.button.privacy"                  = "";
-"paywall.button.restore"                  = "";
-"paywall.button.terms"                    = "";
-"paywall.one_button.button.close"         = "";
-"paywall.one_button.button.continue"      = "";
-"paywall.one_button.feature.first"        = "";
-"paywall.one_button.feature.second"       = "";
-"paywall.one_button.price"                = "";
-"paywall.one_button.title"                = "";
-"paywall.one_button.trial.actual"         = "";
-"paywall.one_button.trial.free"           = "";
-"paywall.period.day"                      = "";
-"paywall.period.month"                    = "";
-"paywall.period.quartal"                  = "";
-"paywall.period.week"                     = "";
-"paywall.period.year"                     = "";
+"att.request.description.second" = "Für Inhalte, die Ihren Interessen entsprechen";
 
-/* $9.99 per quarter */
-"paywall.price_per_period"                = "";
+"att.request.note" = "Sie können Ihre Entscheidung jederzeit überprüfen und Änderungen an den Einstellungen vornehmen";
 
-/* $3.33/month */
-"paywall.price_slash_period"              = "";
+"att.request.title" = "Tracking aktivieren";
 
-/* Try Free and Subscribe */
-"paywall.try_free_and_subscribe"          = "";
+"check.internet.title" = "Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es später erneut";
 
-/* That’s just $3.33/month */
-"paywall.two_buttons.info_just"           = "";
+"default_upsell.title" = "Premium\nFreischalten & genießen";
 
-/* Try For Free */
-"paywall.two_buttons.subtitle"            = "";
-"subs.noPaymentLabel.text" = "";
+"default_upsell.upgrade.title" = "AUFRÜSTEN";
 
-/* Enjoy all features of the app ad free and make sure that all new features are unlocked for you to use. Try for free. No commitment. Cancel anytime. */
-"paywall.two_buttons.text"                = "";
+"general.button.back" = "Zurück";
 
-/* Enjoy all features of the app ad free and make sure that all new features are unlocked for you to use. Try 3 days free, then $4.99 per month. No commitment. Cancel anytime. */
-"paywall.two_buttons.text_format"         = "";
+"general.button.close" = "Schließen";
 
-/* Enjoy all features of the app ad free and make sure that all new features are unlocked for you to use. Try 3 days free, then $4.99 per month. No commitment. Cancel anytime. */
-"paywall.two_buttons.text_format7"        = "";
+"general.button.done" = "Erledigt";
 
-/* Full Access */
-"paywall.two_buttons.title"               = "";
-"permissions.button.continue"             = "";
-"permissions.feature.location.title"      = "";
-"permissions.feature.notifications.title" = "";
-"permissions.feature.motion_data.title"   = "";
-"permissions.feature.photos.title"        = "";
-"permissions.subtitle"                    = "";
-"permissions.title"                       = "";
-"settings.contact_us.subtitle"            = "";
-"settings.contact_us.title"               = "";
-"settings.help_support.section.title"     = "";
-"settings.privacy.subtitle"               = "";
-"settings.privacy.title"                  = "";
-"settings.rateapp.title"                  = "";
-"settings.restore_fail.subtitle"          = "";
-"settings.restore.subtitle"               = "";
-"settings.restore.title"                  = "";
-"settings.share_app.title"                = "";
-"settings.share.subtitle"                 = "";
+"general.button.ok" = "OK";
+
+"general.button.retry" = "Wiederholen";
+
+"no_internet.subtitle" = "Keine Internetverbindung, versuchen Sie es später";
+
+"no_internet.title" = "Hoppla";
+
+"no_mail_app.subtitle" = "Sie haben keine Mail-App";
+
+"no_mail_app.title" = "Hoppla";
+
+"paywall.additional_offer.subtitle" = "Hier ein Angebot für Sie:";
+
+"paywall.additional_offer.text_format" = "Sie können zwischen einer längeren Testphase (7 statt 3 Tage) und einem noch günstigeren Quartalspreis wählen. Testen Sie 7 Tage kostenlos und erhalten Sie dann %@. Sichern Sie sich alle Premium-Funktionen. Verpassen Sie dieses zeitlich begrenzte Angebot nicht!";
+
+"paywall.additional_offer.title" = "Nicht überzeugt?";
+
+"paywall.button.no_internet" = "Erinnere mich, wenn die Internetverbindung wiederhergestellt ist";
+
+"paywall.button.privacy" = "Datenschutz";
+
+"paywall.button.restore" = "Wiederherstellen";
+
+"paywall.button.terms" = "Bedingungen";
+
+"paywall.one_button.button.close" = "oder mit einer eingeschränkten Version fortfahren";
+
+"paywall.one_button.button.continue" = "Weitermachen";
+
+"paywall.one_button.feature.first" = "Genießen Sie alle Funktionen der App";
+
+"paywall.one_button.feature.second" = "Anzeigen entfernen";
+
+"paywall.one_button.price" = "Abonnieren Sie für %@ pro %@";
+
+"paywall.one_button.title" = "Unbegrenzter Zugriff\nauf alle Funktionen";
+
+"paywall.one_button.trial.actual" = "Dann %@ pro %@";
+
+"paywall.one_button.trial.free" = "%lld Tage Testversion";
+
+"paywall.period.day" = "Tag";
+
+"paywall.period.month" = "Monat";
+
+"paywall.period.quartal" = "Quartal";
+
+"paywall.period.week" = "Woche";
+
+"paywall.period.year" = "Jahr";
+
+"paywall.price_per_period" = "%@ pro %@";
+
+"paywall.price_slash_period" = "%@/%@";
+
+"paywall.try_free_and_subscribe" = "Kostenlos testen und abonnieren";
+
+"paywall.two_buttons.info_just" = "Das ist nur %@";
+
+"paywall.two_buttons.subtitle" = "Kostenlos testen";
+
+"paywall.two_buttons.text" = "Genieße alle Funktionen der App werbefrei und stelle sicher, dass alle neuen Funktionen für dich freigeschaltet sind. Kostenlos testen. Keine Verpflichtung. Jederzeit kündbar.";
+
+"paywall.two_buttons.text_format" = "Genieße alle Funktionen der App werbefrei und stelle sicher, dass alle neuen Funktionen für dich freigeschaltet sind. Teste die App %lld Tage kostenlos, danach %@. Keine Verpflichtung. Jederzeit kündbar.";
+
+"paywall.two_buttons.title" = "Vollzugriff";
+
+"permissions.button.continue" = "Ok, ich verstehe";
+
+"permissions.feature.location.title" = "Service an der Station";
+
+"permissions.feature.motion_data.title" = "Bewegung & Fitness";
+
+"permissions.feature.notifications.title" = "Benachrichtigungen";
+
+"permissions.feature.photos.title" = "Fotos";
+
+"permissions.subtitle" = "Ist möglich, wenn Sie Zugriff gewähren auf:";
+
+"permissions.title" = "Beste App-Erfahrung";
+
+"settings.contact_us.subtitle" = "Wir würden uns freuen, von Ihnen zu hören";
+
+"settings.contact_us.title" = "Kontaktieren Sie uns";
+
+"settings.help_support.section.title" = "Hilfe & Support";
+
+"settings.privacy.subtitle" = "Und andere Gesetzestexte";
+
+"settings.privacy.title" = "Datenschutzrichtlinie";
+
+"settings.rateapp.title" = "Bewerte die App";
+
+"settings.restore.subtitle" = "Wir finden Dinge, die Sie bereits gekauft haben";
+
+"settings.restore.title" = "Käufe wiederherstellen";
+
+"settings.restore_fail.subtitle" = "Es tut uns leid, es sieht so aus, als hätten Sie keine Einkäufe";
+
+"settings.share.subtitle" = "Teilen Sie über Ihren bevorzugten Messenger";
+
+"settings.share_app.title" = "App teilen";
+
