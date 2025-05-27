@@ -365,6 +365,12 @@ private extension Paywall.PurchasesManager {
       
       self.offerings = offerings
       
+      if let offering = offerings?.all.first(where: { $0.key == self.config.paywall.offering }) {
+        self.currentOffering = offering.value
+      } else {
+        self.currentOffering = offerings?.current
+      }
+      
       if let offering = offerings?.currentOffering(forPlacement: "all_card") {
         self.currentAllCardOffering = offering
       } else {
@@ -393,6 +399,12 @@ private extension Paywall.PurchasesManager {
         self.currentSessionOffering = offering
       } else {
         self.currentSessionOffering = offerings?.current
+      }
+      
+      if let packages = self.currentOffering?.availablePackages {
+        for package in packages {
+          self.products.insert(package.storeProduct)
+        }
       }
       
       if let packages = self.currentAllCardOffering?.availablePackages {
