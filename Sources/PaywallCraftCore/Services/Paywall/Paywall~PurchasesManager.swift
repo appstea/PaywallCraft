@@ -174,7 +174,16 @@ extension Paywall {
         if let presenter = presenter as? UIViewControllerTransitioningDelegate {
           controller.transitioningDelegate = presenter
         }
-        debugPrint("[DEBUG] RCPaywall opened")
+        debugPrint("[DEBUG] RCPaywall opened placementOffering")
+      } else {
+        let controller = PaywallViewController(offering: nil)
+        controller.delegate = self
+        presenter.present(controller, animated: true)
+        self.onEvents = onEvents
+        if let presenter = presenter as? UIViewControllerTransitioningDelegate {
+          controller.transitioningDelegate = presenter
+        }
+        debugPrint("[DEBUG] RCPaywall opened nil")
       }
     }
     
