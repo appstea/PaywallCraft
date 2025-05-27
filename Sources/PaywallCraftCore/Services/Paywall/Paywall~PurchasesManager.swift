@@ -155,7 +155,7 @@ extension Paywall {
         }
       }
       
-      if currentOffering == nil && showData.shouldWaitOfferingsToLoad { return }
+//      if currentOffering == nil && showData.shouldWaitOfferingsToLoad { return }
       
       if showData.canShowRCPaywall {
         self.showRCPaywallIfPossible(showData: showData, from: presenter, source: source, onEvents: onEvents)
