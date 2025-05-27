@@ -37,7 +37,7 @@ let package = Package(
       .package(url: "https://github.com/eddiekaiger/SwiftyAttributes", branch: "master"),
       .package(url: "https://github.com/sparrowcode/PermissionsKit", .upToNextMajor(from: "11.1.0")),
       .package(url: "https://github.com/layoutBox/PinLayout", .upToNextMajor(from: "1.10.3")),
-      .package(url: "https://github.com/RevenueCat/purchases-ios.git", .upToNextMajor(from: "5.21.1")),
+      .package(url: "https://github.com/RevenueCat/purchases-ios.git", .upToNextMajor(from: "5.25.2")),
       .package(url: "https://github.com/ashleymills/Reachability.swift", .upToNextMajor(from: "5.2.4")),
       .package(url: "https://github.com/sereivoanyong/SVProgressHUD.git", branch: "master"),
       .package(url: "https://github.com/AppsFlyerSDK/AppsFlyerFramework", .upToNextMajor(from: "6.16.2")),

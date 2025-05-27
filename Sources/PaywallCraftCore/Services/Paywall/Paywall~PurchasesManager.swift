@@ -60,9 +60,33 @@ extension Paywall {
     private weak var currentPaywallScreen: Paywall.ViewController?
     private let transactionsObserver = TransactionsObserver()
     
+    private var offerings: Offerings?
+    
     private var currentOffering: Offering?
     
+    private var currentAllCardOffering: Offering?
+    private var currentCardOffering: Offering?
+    private var currentMapOffering: Offering?
+    private var currentOnboardingOffering: Offering?
+    private var currentSessionOffering: Offering?
+    
     private var products: Set<StoreProduct> = [] {
+      didSet { Notification.Paywall.Update.post(.products) }
+    }
+    
+    private var productsAllCard: Set<StoreProduct> = [] {
+      didSet { Notification.Paywall.Update.post(.products) }
+    }
+    private var productsCard: Set<StoreProduct> = [] {
+      didSet { Notification.Paywall.Update.post(.products) }
+    }
+    private var productsMap: Set<StoreProduct> = [] {
+      didSet { Notification.Paywall.Update.post(.products) }
+    }
+    private var productsOnboarding: Set<StoreProduct> = [] {
+      didSet { Notification.Paywall.Update.post(.products) }
+    }
+    private var productsSession: Set<StoreProduct> = [] {
       didSet { Notification.Paywall.Update.post(.products) }
     }
     
@@ -93,11 +117,9 @@ extension Paywall {
       let rcConfiguration = RevenueCat.Configuration.Builder(withAPIKey: config.paywall.apiKey)
         .with(storeKitVersion: .storeKit1)
         .build()
-      
       Purchases.configure(with: rcConfiguration)
       Purchases.shared.attribution.enableAdServicesAttributionTokenCollection()
       Purchases.shared.delegate = self
-      
       SKPaymentQueue.default().add(transactionsObserver)
       syncIfNeeded()
     }
@@ -144,16 +166,16 @@ extension Paywall {
     
     private func showRCPaywallIfPossible(showData: PaywallShowData, from presenter: UIViewController, source: some IPaywallSource, onEvents: Paywall.OnEvents? = nil) {
       Paywall.Service.shared?.updateAttribute(.paywall_source(source))
-      
-      let controller = PaywallViewController(offering: nil)
-      controller.delegate = self
-      presenter.present(controller, animated: true)
-      self.onEvents = onEvents
-      
-      if let presenter = presenter as? UIViewControllerTransitioningDelegate {
-        controller.transitioningDelegate = presenter
+      if let placementOffering = offerings?.currentOffering(forPlacement: source.analytics.value.lowercased()) {
+        let controller = PaywallViewController(offering: placementOffering)
+        controller.delegate = self
+        presenter.present(controller, animated: true)
+        self.onEvents = onEvents
+        if let presenter = presenter as? UIViewControllerTransitioningDelegate {
+          controller.transitioningDelegate = presenter
+        }
+        debugPrint("[DEBUG] RCPaywall opened")
       }
-      debugPrint("[DEBUG] RCPaywall opened")
     }
     
     @MainActor
@@ -272,6 +294,22 @@ extension Paywall {
     func productsList() -> [StoreProduct] {
       Array(products)
     }
+    
+//    func productsList() -> [StoreProduct] {
+//      switch config.placement {
+//      case .all_card:
+//        Array(productsAllCard)
+//      case .card:
+//        Array(productsCard)
+//      case .map:
+//        Array(productsMap)
+//      case .onboarding:
+//        Array(productsOnboarding)
+//      case .session:
+//        Array(productsSession)
+//      }
+//
+//    }
   }
 }
 
@@ -313,22 +351,71 @@ private extension Paywall.PurchasesManager {
     }
     
     isLoadingProducts = true
-    Purchases.shared.getOfferings { [weak self] offerings, _ in
-      guard let self = self else { return }
+//    let placementOffering = offerings.getCurrentOffering(forPlacement: "onboarding_end")
+    Purchases.shared.getOfferings { offerings, error in
       
-      if let offering = offerings?.all.first(where: { $0.key == self.config.paywall.offering }) {
-        self.currentOffering = offering.value
+      self.offerings = offerings
+      
+      if let offering = offerings?.currentOffering(forPlacement: "all_card") {
+        self.currentAllCardOffering = offering
       } else {
-        self.currentOffering = offerings?.current
+        self.currentAllCardOffering = offerings?.current
       }
       
-      if let packages = self.currentOffering?.availablePackages {
+      if let offering = offerings?.currentOffering(forPlacement: "card") {
+        self.currentCardOffering = offering
+      } else {
+        self.currentCardOffering = offerings?.current
+      }
+      
+      if let offering = offerings?.currentOffering(forPlacement: "map") {
+        self.currentMapOffering = offering
+      } else {
+        self.currentMapOffering = offerings?.current
+      }
+      
+      if let offering = offerings?.currentOffering(forPlacement: "onboarding") {
+        self.currentOnboardingOffering = offering
+      } else {
+        self.currentOnboardingOffering = offerings?.current
+      }
+      
+      if let offering = offerings?.currentOffering(forPlacement: "session") {
+        self.currentSessionOffering = offering
+      } else {
+        self.currentSessionOffering = offerings?.current
+      }
+      
+      if let packages = self.currentAllCardOffering?.availablePackages {
         for package in packages {
-          self.products.insert(package.storeProduct)
+          self.productsAllCard.insert(package.storeProduct)
         }
       }
       
-      debugPrint("[DEBUG] Products: \(self.products)")
+      if let packages = self.currentCardOffering?.availablePackages {
+        for package in packages {
+          self.productsCard.insert(package.storeProduct)
+        }
+      }
+      
+      if let packages = self.currentMapOffering?.availablePackages {
+        for package in packages {
+          self.productsMap.insert(package.storeProduct)
+        }
+      }
+      
+      if let packages = self.currentOnboardingOffering?.availablePackages {
+        for package in packages {
+          self.productsOnboarding.insert(package.storeProduct)
+        }
+      }
+      
+      if let packages = self.currentSessionOffering?.availablePackages {
+        for package in packages {
+          self.productsSession.insert(package.storeProduct)
+        }
+      }
+      
       self.isLoadingProducts = false
       Notification.Paywall.Update.post(.products)
     }

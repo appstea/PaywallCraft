@@ -7,6 +7,14 @@
 import Foundation
 import UIKit
 
+public enum PlacementType: String {
+  case all_card
+  case card
+  case map
+  case onboarding
+  case session
+}
+
 public struct Config {
 
   let paywall: Paywall
