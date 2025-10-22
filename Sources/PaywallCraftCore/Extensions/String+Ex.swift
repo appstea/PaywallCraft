@@ -6,17 +6,31 @@
 //
 
 import Foundation
+import PaywallCraftResources
 
 public extension String {
   
   /// Returns a localized version of the string.
   var localized: String {
-    // Use the PaywallCraftResources module bundle for localization
-    guard let bundle = Bundle(identifier: "PaywallCraft.PaywallCraftResources") else {
-      // Fallback to main bundle if module bundle not found
-      return NSLocalizedString(self, comment: "Localized version of the string.")
+    // Use the PaywallCraftResources bundle for localization
+    let bundle = Bundle(for: BundleToken.self)
+    let localizedString = bundle.localizedString(forKey: self, value: nil, table: "Localizable")
+    
+    // If we get the key back or empty string, try English fallback
+    if localizedString == self || localizedString.isEmpty {
+      // Try to get English version by looking for en.lproj specifically
+      if let englishPath = bundle.path(forResource: "en", ofType: "lproj"),
+         let englishBundle = Bundle(path: englishPath) {
+        let englishString = englishBundle.localizedString(forKey: self, value: nil, table: "Localizable")
+        
+        // If English succeeds, return it
+        if englishString != self && !englishString.isEmpty {
+          return englishString
+        }
+      }
     }
-    return bundle.localizedString(forKey: self, value: nil, table: "Localizable")
+    
+    return localizedString
   }
   
   /// Returns a localized string with formatted values.
