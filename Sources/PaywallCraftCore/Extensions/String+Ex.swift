@@ -16,18 +16,24 @@ public extension String {
     let bundle = Bundle(for: PaywallCraftResourcesBundleToken.self)
     let localizedString = bundle.localizedString(forKey: self, value: nil, table: "Localizable")
     
-    // If we get the key back or empty string, try English fallback
-    if localizedString == self || localizedString.isEmpty {
+    // If we get the key back, it means localization failed - return empty string to hide it
+    if localizedString == self {
+      return ""
+    }
+    
+    // If we get empty string, try English fallback
+    if localizedString.isEmpty {
       // Try to get English version by looking for en.lproj specifically
       if let englishPath = bundle.path(forResource: "en", ofType: "lproj"),
          let englishBundle = Bundle(path: englishPath) {
         let englishString = englishBundle.localizedString(forKey: self, value: nil, table: "Localizable")
         
-        // If English succeeds, return it
+        // If English succeeds, return it; otherwise return empty string
         if englishString != self && !englishString.isEmpty {
           return englishString
         }
       }
+      return ""
     }
     
     return localizedString
