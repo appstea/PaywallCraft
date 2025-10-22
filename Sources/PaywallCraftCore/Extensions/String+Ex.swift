@@ -11,7 +11,8 @@ public extension String {
   
   /// Returns a localized version of the string.
   var localized: String {
-    return NSLocalizedString(self, comment: "Localized version of the string.")
+    // Use the PaywallCraft module bundle for localization
+    return Bundle.module.localizedString(forKey: self, value: nil, table: "Localizable")
   }
   
   /// Returns a localized string with formatted values.
