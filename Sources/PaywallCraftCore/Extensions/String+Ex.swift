@@ -12,8 +12,8 @@ public extension String {
   
   /// Returns a localized version of the string.
   var localized: String {
-    // Use the PaywallCraftResources bundle for localization by referencing a public type
-    let bundle = Bundle(for: PaywallCraftResources.L10n.self)
+    // Use the PaywallCraftResources bundle for localization by referencing a public marker class
+    let bundle = Bundle(for: PaywallCraftResourcesBundleToken.self)
     let localizedString = bundle.localizedString(forKey: self, value: nil, table: "Localizable")
     
     // If we get the key back or empty string, try English fallback
